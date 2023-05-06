@@ -4,16 +4,14 @@ import { z } from "zod";
 export const env = createEnv({
     server: {
         DATABASE_URL: z.string().url(),
-        DATABASE_SERVICE_ROLE: z.string(),
+        SHADOW_DATABASE_URL: z.string().url(),
         JWT_SECRET: z.string(),
     },
     client: {
-        NEXT_PUBLIC_SUPABASE_API_KEY: z.string(),
     },
     runtimeEnv: {
         DATABASE_URL: process.env.DATABASE_URL,
-        NEXT_PUBLIC_SUPABASE_API_KEY: process.env.NEXT_PUBLIC_SUPABASE_API_KEY,
-        DATABASE_SERVICE_ROLE: process.env.DATABASE_SERVICE_ROLE,
+        SHADOW_DATABASE_URL: process.env.SHADOW_DATABASE_URL,
         JWT_SECRET: process.env.JWT_SECRET,
     },
 });
