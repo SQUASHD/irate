@@ -1,6 +1,4 @@
-interface SVGProps {
-  props: React.SVGProps<SVGSVGElement>;
-}
+export type SVGProps = React.SVGProps<SVGSVGElement>;
 
 export function IrateLogo(props: SVGProps) {
   return (
