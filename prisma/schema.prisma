@@ -11,25 +11,35 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
-model NespressoCapsules {
-  id          Int      @id @default(autoincrement())
-  name        String
-  description String
-  price       Decimal  @db.Decimal(10, 2)
-  image       String
-  intensity   Int
-  size        String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  ratings     Rating[]
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  items     Items[]
+}
+
+model Items {
+  id               Int      @id @default(autoincrement())
+  name             String
+  description      String
+  price            Decimal  @db.Decimal(10, 2)
+  image            String
+  informationField Json
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  ratings          Rating[]
+  category         Category @relation(fields: [categoryId], references: [id])
+  categoryId       Int
 }
 
 model Rating {
-  id          Int               @id @default(autoincrement())
-  rating      Int
-  comment     String
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
-  itemRated   NespressoCapsules @relation(fields: [itemRatedId], references: [id])
-  itemRatedId Int
+  id        Int      @id @default(autoincrement())
+  rating    Int
+  comment   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  itemsId   Int
+  items     Items    @relation(fields: [itemsId], references: [id])
+  userId    String
 }
