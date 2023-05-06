@@ -13,7 +13,7 @@ export const env = createEnv({
     runtimeEnv: {
         DATABASE_URL: process.env.DATABASE_URL,
         NEXT_PUBLIC_SUPABASE_API_KEY: process.env.NEXT_PUBLIC_SUPABASE_API_KEY,
-        DATABASE_SERVICE_ROLE: process.env.DABATASE_SERVICE_ROLE,
+        DATABASE_SERVICE_ROLE: process.env.DATABASE_SERVICE_ROLE,
         JWT_SECRET: process.env.JWT_SECRET,
     },
 });
