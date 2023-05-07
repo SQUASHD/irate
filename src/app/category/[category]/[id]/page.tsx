@@ -1,6 +1,7 @@
 import { StarIcon } from "@/assets/icons";
 import { prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
+import { informationFieldSchema } from "./Types";
 
 const totalReviews = { average: 4, totalCount: 1624 };
 const reviews = [
@@ -53,6 +54,10 @@ export default async function ItemPage({ params: { category, id } }: Props) {
   if (!item) {
     notFound();
   }
+
+  const validatedInformationField = informationFieldSchema.parse(
+    item.informationField
+  );
   return (
     <div className="">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
@@ -103,6 +108,7 @@ export default async function ItemPage({ params: { category, id } }: Props) {
         {/* Product image */}
         <div className="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
           <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg">
+            {/* TODO: Add image carousel */}
             {item.images.map((image) => (
               <img
                 key={image.id}
@@ -121,27 +127,29 @@ export default async function ItemPage({ params: { category, id } }: Props) {
               <h2 id="options-heading" className="sr-only">
                 Product Information
               </h2>
-              {Object.keys(
-                item.informationField?.flavourProfile as coffeeInfo
-              ).map((flavour) => (
-                <div className="flex gap-2" key={flavour}>
-                  <h3 className="w-32 text-sm uppercase">{flavour}</h3>
-                  <div className="flex items-center gap-2">
-                    {[0, 1, 2, 3, 4].map((rating) => (
-                      <div
-                        key={rating}
-                        className={classNames(
-                          item.informationField.flavourProfile[flavour] > rating
-                            ? "bg-zinc-200"
-                            : "bg-zinc-600",
-                          "h-1 w-12 flex-shrink-0"
-                        )}
-                        aria-hidden="true"
-                      />
-                    ))}
+              {Object.keys(validatedInformationField.flavourProfile).map(
+                (flavour) => (
+                  <div className="flex gap-2" key={flavour}>
+                    <h3 className="w-32 text-sm uppercase">{flavour}</h3>
+                    <div className="flex items-center gap-2">
+                      {[0, 1, 2, 3, 4].map((rating) => (
+                        <div
+                          key={rating}
+                          className={classNames(
+                            validatedInformationField.flavourProfile[
+                              flavour as keyof coffeeInfo
+                            ] > rating
+                              ? "bg-zinc-200"
+                              : "bg-zinc-600",
+                            "h-1 w-12 flex-shrink-0"
+                          )}
+                          aria-hidden="true"
+                        />
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
+                )
+              )}
             </section>
           )}
         </div>
