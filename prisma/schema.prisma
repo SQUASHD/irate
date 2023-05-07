@@ -12,25 +12,34 @@ datasource db {
 }
 
 model Category {
-  id        Int      @id @default(autoincrement())
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  items     Items[]
+  id           Int      @id @default(autoincrement())
+  slug         String   @unique
+  name         String
+  description  String
+  image        String
+  totalRatings Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  items        Item[]
+
+  @@index([slug], name: "slug")
 }
 
-model Items {
+model Item {
   id               Int      @id @default(autoincrement())
   name             String
   description      String
-  price            Decimal  @db.Decimal(10, 2)
   image            String
+  imageAlt         String?
+  href             String
   informationField Json
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
   ratings          Rating[]
-  category         Category @relation(fields: [categoryId], references: [id])
-  categoryId       Int
+  category         Category @relation(fields: [categoryId], references: [slug])
+  categoryId       String
+
+  @@index([categoryId], name: "categoryId")
 }
 
 model Rating {
@@ -40,6 +49,16 @@ model Rating {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   itemsId   Int
-  items     Items    @relation(fields: [itemsId], references: [id])
+  items     Item     @relation(fields: [itemsId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
   userId    String
+}
+
+model User {
+  id        String   @id
+  name      String
+  email     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ratings   Rating[]
 }
