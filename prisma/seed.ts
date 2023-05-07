@@ -89,8 +89,8 @@ async function main() {
       href: "https://www.nespresso.com/no/no/order/capsules/vertuo/vertuo-costa-rica-kaffe",
       informationField: {
         capsuleType: "Vertuo",
-        tagLine: "Malty & Sweet",
         cupSize: "DOUBLE ESPRESSO (2.7 OZ)",
+        tagLine: "Malty & Sweet",
         notes: "Nutty & Balanced",
         intensity: 7,
         flavourProfile: {
