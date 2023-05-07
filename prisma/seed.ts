@@ -32,6 +32,7 @@ async function main() {
         tagLine: "Dark & Bold",
         cupSize: "DOUBLE ESPRESSO (2.7 OZ)",
         intensity: 11,
+        notes: "Roasted & Chocolatey",
         flavourProfile: {
           bitterness: 3,
           acidity: 1,
@@ -90,6 +91,7 @@ async function main() {
         capsuleType: "Vertuo",
         tagLine: "Malty & Sweet",
         cupSize: "DOUBLE ESPRESSO (2.7 OZ)",
+        notes: "Nutty & Balanced",
         intensity: 7,
         flavourProfile: {
           bitterness: 3,
