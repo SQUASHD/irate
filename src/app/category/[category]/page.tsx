@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { prisma } from "@/lib/db";
+import { notFound } from "next/navigation";
 
 interface Props {
   params: {
@@ -14,7 +15,14 @@ export default async function CategoryPage({ params: { category } }: Props) {
         slug: category,
       },
     },
+    include: {
+      images: true,
+    },
   });
+
+  if (items.length < 1 || !items) {
+    notFound();
+  }
   return (
     <div className="">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -29,7 +37,9 @@ export default async function CategoryPage({ params: { category } }: Props) {
             >
               <div className="aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7 w-full overflow-hidden rounded-lg bg-zinc-200">
                 <img
-                  src={item.image}
+                  src={
+                    item.images[0]?.href ?? "https://via.placeholder.com/300"
+                  }
                   alt={"Alt"}
                   className="h-full w-full object-cover object-center group-hover:opacity-75"
                 />

@@ -1,12 +1,21 @@
 import Link from "next/link";
 import { prisma } from "@/lib/db";
+import { notFound } from "next/navigation";
 
 async function getCategories() {
-  return prisma.category.findMany();
+  return prisma.category.findMany({
+    include: {
+      image: true,
+    },
+  });
 }
 
 export default async function CategoriesPage() {
   const categories = await getCategories();
+
+  if (!categories) {
+    notFound();
+  }
 
   return (
     <div className="">
@@ -22,8 +31,8 @@ export default async function CategoriesPage() {
             >
               <div className="aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7 w-full overflow-hidden rounded-lg bg-zinc-200">
                 <img
-                  src={category.image}
-                  alt="Alt to come"
+                  src={category.image.href}
+                  alt={category.image.alt ?? "Bilde av kategori"}
                   className="h-full w-full object-cover object-center group-hover:opacity-75"
                 />
               </div>
