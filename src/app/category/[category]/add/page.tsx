@@ -1,81 +1,69 @@
 import { auth } from "@clerk/nextjs/server";
 import { env } from "@/env.mjs";
-import * as z from "zod";
 import { informationFieldSchema } from "@/app/category/[category]/[id]/Types";
 import { prisma } from "@/lib/db";
-
-interface AddItemData {
-  capsuleName: string;
-  description: string;
-  purchaseHref: string;
-  imageHref: string;
-  cupSize: string;
-  tagLine: string;
-  aromaticNotes: string;
-  intensity: string;
-  bitterness: string;
-  acidity: string;
-  roast: string;
-  body: string;
-}
-export default async function EditCategoryPage() {
+export default async function AddItemPage() {
   const { userId } = auth();
-
-  function pick<T, K extends keyof T>(source: T, ...keys: K[]): Pick<T, K> {
-    const returnValue = {} as Pick<T, K>;
-    keys.forEach((k) => {
-      returnValue[k] = source[k];
-    });
-    return returnValue;
-  }
 
   async function addItem(formData: FormData) {
     "use server";
+    const capsuleName = formData.get("capsuleName") as string;
+    const description = formData.get("description") as string;
+    const purchaseHref = formData.get("purchaseHref") as string;
+    const imageHref = formData.get("imageHref") as string;
+    const cupSize = formData.get("cupSize") as string;
+    const tagLine = formData.get("tagLine") as string;
+    const aromaticNotes = formData.get("aromaticNotes") as string;
+    const intensity = formData.get("intensity") as string;
+    const bitterness = formData.get("bitterness") as string;
+    const acidity = formData.get("acidity") as string;
+    const roast = formData.get("roast") as string;
+    const body = formData.get("body") as string;
 
-    for (const value of formData.keys()) {
-      console.log(value);
+    informationFieldSchema.parse({
+      cupSize: cupSize,
+      tagLine: tagLine,
+      notes: aromaticNotes,
+      intensity: parseInt(intensity),
+      capsuleType: "Vertuo",
+      flavourProfile: {
+        bitterness: parseInt(bitterness),
+        acidity: parseInt(acidity),
+        roast: parseInt(roast),
+        body: parseInt(body),
+      },
+    });
+
+    const item = await prisma.item.create({
+      data: {
+        name: capsuleName,
+        description: description,
+        href: purchaseHref,
+        categoryId: "nespresso-capsules",
+        images: {
+          create: {
+            href: imageHref,
+            alt: capsuleName,
+          },
+        },
+        informationField: {
+          capsuleType: "Vertuo",
+          tagLine: tagLine,
+          cupSize: cupSize,
+          intensity: parseInt(intensity),
+          notes: aromaticNotes,
+          flavourProfile: {
+            bitterness: parseInt(bitterness),
+            acidity: parseInt(acidity),
+            roast: parseInt(roast),
+            body: parseInt(body),
+          },
+        },
+      },
+    });
+    if (item) {
+      alert("Item added!");
     }
-
-    // informationFieldSchema.parse({
-    //   cupSize: cupSize,
-    //   tagLine: tagLine,
-    //   aromaticNotes: aromaticNotes,
-    //   intensity: intensity,
-    //   flavourProfile: {
-    //     bitterness: bitterness,
-    //     acidity: acidity,
-    //     roast: roast,
-    //     body: body,
-    //   },
-    // });
-    //
-    // await prisma.item.create({
-    //   data: {
-    //     name: capsuleName,
-    //     description: description,
-    //     href: purchaseHref,
-    //     categoryId: "nespresso-capsules",
-    //     images: {
-    //       create: {
-    //         href: imageHref,
-    //         alt: capsuleName,
-    //       },
-    //     },
-    //     informationField: {
-    //       capsuleType: "Vertuo",
-    //       tagLine: tagLine,
-    //       cupSize: cupSize,
-    //       intensity: intensity,
-    //       notes: aromaticNotes,
-    //       flavourProfile: {
-    //         bitterness: bitterness,
-    //         acidity: acidity,
-    //         body: body,
-    //         roast: roast,
-    //       },
-    //     },
-    //   },
-    // });
   }
 
   if (userId !== env.CLERK_ADMIN_ID) {
@@ -233,6 +221,7 @@ export default async function EditCategoryPage() {
                     name="tagLine"
                     id="tagLine"
                     required={true}
+                    minLength={5}
                     className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -250,6 +239,7 @@ export default async function EditCategoryPage() {
                     type="text"
                     name="aromaticNotes"
                     id="aromaticNotes"
+                    minLength={5}
                     required={true}
                     className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
                   />
