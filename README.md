@@ -3,15 +3,18 @@ My dad bought a bunch of Nespresso&reg; capsules and wanted to keep track of whi
 I'm making this app for him to do just that. Limited in scope and functionality to start with – maybe I'll add
 more features later.
 
-## To-Do
-- [ ] List capsules w/ product info
-- [ ] Image/asset bucket
-- [ ] Data persistence
-- [ ] Rating functionality
-- [ ] Basic auth
+## Update: 2023-05-07
+Project is coming along nicely. React Server Components are a lot of fun, and NextJS server actions are pretty cool too.
+Now to intercept image uploads from the form to the server and save them to a bucket. And of course basic rating functionality. MVP what?
 
+## To-Do
+- [x] List capsules w/ product info
+- [x] Data persistence
+- [x] Basic auth
+- [x] Functionality to add other items – kinda, just need to make a more general input form
+- [ ] Image/asset bucket
+- [ ] Rating functionality
 
 ## Maybe Later
-- Functionality to add other items
 - Global rating
 - Teams/Groups
