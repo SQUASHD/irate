@@ -7,6 +7,7 @@ export const env = createEnv({
         SHADOW_DATABASE_URL: z.string().url(),
         CLERK_SECRET_KEY: z.string(),
         NODE_ENV: z.string(),
+        APP_ENV: z.string(),
         CLERK_ADMIN_ID: z.string(),
     },
     client: {
@@ -27,5 +28,6 @@ export const env = createEnv({
         NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL: process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL,
         NODE_ENV: process.env.NODE_ENV,
         CLERK_ADMIN_ID: process.env.CLERK_ADMIN_ID,
+        APP_ENV: process.env.APP_ENV,
     },
 });
