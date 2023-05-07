@@ -16,11 +16,12 @@ model Category {
   slug         String   @unique
   name         String
   description  String
-  image        String
   totalRatings Int      @default(0)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   items        Item[]
+  image        Image    @relation(fields: [imageId], references: [id])
+  imageId      Int
 
   @@index([slug], name: "slug")
 }
@@ -29,15 +30,14 @@ model Item {
   id               Int      @id @default(autoincrement())
   name             String
   description      String
-  image            String
-  imageAlt         String?
   href             String
   informationField Json
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
-  ratings          Rating[]
   category         Category @relation(fields: [categoryId], references: [slug])
   categoryId       String
+  ratings          Rating[]
+  images           Image[]
 
   @@index([categoryId], name: "categoryId")
 }
@@ -45,7 +45,7 @@ model Item {
 model Rating {
   id        Int      @id @default(autoincrement())
   rating    Int
-  comment   String
+  comment   String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   itemsId   Int
@@ -61,4 +61,15 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   ratings   Rating[]
+}
+
+model Image {
+  id        Int        @id @default(autoincrement())
+  href      String
+  alt       String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  items     Item?      @relation(fields: [itemId], references: [id])
+  itemId    Int?
+  category  Category[]
 }
