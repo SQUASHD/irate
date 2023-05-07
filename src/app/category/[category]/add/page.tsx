@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { env } from "@/env.mjs";
 import { informationFieldSchema } from "@/app/category/[category]/[id]/Types";
 import { prisma } from "@/lib/db";
+import { notFound, redirect } from "next/navigation";
 export default async function AddItemPage() {
   const { userId } = auth();
 
@@ -62,17 +63,12 @@ export default async function AddItemPage() {
       },
     });
     if (item) {
-      alert("Item added!");
+      redirect(`/category/nespresso-capsules/${item.id}`);
     }
   }
 
   if (userId !== env.CLERK_ADMIN_ID) {
-    return (
-      <div className="flex h-full w-full flex-col items-center justify-center">
-        <h1 className="text-8xl font-black tracking-tighter">401</h1>
-        <h2 className="text-2xl font-light">Unauthorized</h2>
-      </div>
-    );
+    notFound();
   }
   return (
     <div className="flex min-h-full w-full flex-col items-center pb-16 pt-24">

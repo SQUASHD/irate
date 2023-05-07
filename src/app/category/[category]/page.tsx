@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
+import AddItemButton from "@/app/category/[category]/AddItem";
 
 interface Props {
   params: {
@@ -29,13 +30,15 @@ export default async function CategoryPage({ params: { category } }: Props) {
         <h2 className="sr-only">Products</h2>
 
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+          {/* @ts-expect-error */}
+          <AddItemButton segmentSlug={`${category}`} />
           {items.map((item) => (
             <Link
               key={item.id}
               href={`/category/${category}/${item.id}`}
               className="group"
             >
-              <div className="aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7 w-full overflow-hidden rounded-lg bg-zinc-200">
+              <div className="h-48 w-full overflow-hidden rounded-lg bg-zinc-200">
                 <img
                   src={
                     item.images[0]?.href ?? "https://via.placeholder.com/300"

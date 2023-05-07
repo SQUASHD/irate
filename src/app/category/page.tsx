@@ -29,7 +29,7 @@ export default async function CategoriesPage() {
               href={`/category/${category.slug}`}
               className="group"
             >
-              <div className="aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7 w-full overflow-hidden rounded-lg bg-zinc-200">
+              <div className="h-48 w-full overflow-hidden rounded-lg bg-zinc-200">
                 <img
                   src={category.image.href}
                   alt={category.image.alt ?? "Bilde av kategori"}

@@ -2,6 +2,7 @@ import { StarIcon } from "@/assets/icons";
 import { prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
 import { informationFieldSchema } from "./Types";
+import NewImageUrl from "@/app/category/[category]/[id]/NewImageUrl";
 
 const totalReviews = { average: 4, totalCount: 1624 };
 const reviews = [
@@ -110,12 +111,16 @@ export default async function ItemPage({ params: { category, id } }: Props) {
           <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg">
             {/* TODO: Add image carousel */}
             {item.images.map((image) => (
-              <img
-                key={image.id}
-                src={image.href}
-                alt={image.alt}
-                className="h-full w-full object-cover object-center"
-              />
+              <>
+                {/* @ts-expect-error */}
+                <NewImageUrl imageId={image.id} />
+                <img
+                  key={image.id}
+                  src={image.href}
+                  alt={image.alt}
+                  className="h-full w-full object-cover object-center"
+                />
+              </>
             ))}
           </div>
         </div>
