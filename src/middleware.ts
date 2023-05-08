@@ -1,7 +1,11 @@
-import { authMiddleware } from "@clerk/nextjs";
+import { authMiddleware } from "@clerk/nextjs/server";
 
-export default authMiddleware();
+export default authMiddleware({
+  ignoredRoutes: [],
+  publicRoutes: ["/"],
+});
 
+// Stop Middleware running on static files
 export const config = {
-  matcher: ["/((?!.*\\..*|_next).*)", "/"],
+  matcher: ["/(.*?trpc.*?|(?!static|.*\\..*|_next|favicon.ico).*)", "/"],
 };

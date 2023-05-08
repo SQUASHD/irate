@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
-import AddItemButton from "@/app/category/[category]/AddItem";
+import AddItemButton from "@/app/(app)/category/[category]/AddItem";
 
 interface Props {
   params: {

@@ -2,7 +2,7 @@ import { StarIcon } from "@/assets/icons";
 import { prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
 import { informationFieldSchema } from "./Types";
-import NewImageUrl from "@/app/category/[category]/[id]/NewImageUrl";
+import NewImageUrl from "@/app/(app)/category/[category]/[id]/NewImageUrl";
 
 const totalReviews = { average: 4, totalCount: 1624 };
 const reviews = [

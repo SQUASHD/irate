@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { env } from "@/env.mjs";
-import { informationFieldSchema } from "@/app/category/[category]/[id]/Types";
+import { informationFieldSchema } from "@/app/(app)/category/[category]/[id]/Types";
 import { prisma } from "@/lib/db";
 import { notFound, redirect } from "next/navigation";
 export default async function AddItemPage() {
