@@ -10,7 +10,7 @@ export default function BreadCrumb() {
   });
 
   return (
-    <nav className="mx-auto flex max-w-2xl items-center justify-between px-4 py-4 sm:px-6 lg:max-w-7xl lg:px-8">
+    <nav className="mx-auto flex max-w-2xl items-center justify-between px-4 sm:px-6 lg:max-w-7xl lg:px-8">
       <ul className="flex flex-wrap items-center text-xs uppercase sm:text-sm">
         {segments.length > 0 ? (
           <li>

@@ -6,7 +6,7 @@ import BreadCrumb from "@/components/NavBar/BreadCrumb";
 
 export default function NavBar() {
   return (
-    <>
+    <header className="absolute w-full">
       {/* @ts-expect-error */}
       <DevWarning />
       <nav className="w-full bg-gradient-to-b from-zinc-900">
@@ -21,6 +21,6 @@ export default function NavBar() {
         </div>
       </nav>
       <BreadCrumb />
-    </>
+    </header>
   );
 }

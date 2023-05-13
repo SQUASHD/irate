@@ -1,4 +1,4 @@
-import { StarIcon } from "@/assets/icons";
+import { StarIcon, TrashIcon } from "@/assets/icons";
 import { prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
 import NewImageUrl from "@/components/EditingFields/NewImageUrl";
@@ -7,6 +7,7 @@ import { addRating, deleteRating } from "@/server/actions";
 import { auth } from "@clerk/nextjs";
 import UserGuard from "@/components/UserGuard";
 import { addUserData } from "@/utils/addUserData";
+import * as z from "zod";
 
 export const revalidate = 3600; // revalidate every hour
 
@@ -21,7 +22,33 @@ interface Props {
   };
 }
 
-async function getItemData(name: string, category: string) {
+type coffeeInfo = {
+  bitterness: number;
+  acidity: number;
+  body: number;
+  roast: number;
+};
+
+const informationFieldSchema = z.object({
+  capsuleType: z.string(),
+  tagLine: z.string(),
+  cupSize: z.enum([
+    "Espresso (40ml)",
+    "Double Espresso (80ml)",
+    "Gran Lungo (150ml)",
+    "Coffee (230ml)",
+  ]),
+  intensity: z.number().min(2).max(12),
+  notes: z.string(),
+  flavourProfile: z.object({
+    bitterness: z.number().min(1).max(5),
+    acidity: z.number().min(1).max(5),
+    body: z.number().min(1).max(5),
+    roast: z.number().min(1).max(5),
+  }),
+});
+
+async function getNespressoCapsule(name: string, category: string) {
   return prisma.item.findFirst({
     where: {
       name: name,
@@ -45,8 +72,8 @@ async function getItemData(name: string, category: string) {
 
 export default async function ItemPage({ params: { category, name } }: Props) {
   const { userId } = auth();
-  const decodedName = decodeURI(name);
-  const item = await getItemData(decodedName.toString(), category);
+  const decodedName = decodeURIComponent(name);
+  const item = await getNespressoCapsule(decodedName.toString(), category);
 
   const stylizedRatings = await addUserData(item?.ratings ?? []);
 
@@ -64,9 +91,12 @@ export default async function ItemPage({ params: { category, name } }: Props) {
     notFound();
   }
 
+  const validatedInformationField = informationFieldSchema.parse(
+    item.informationField
+  );
   return (
     <>
-      <div className="mx-auto max-w-2xl px-4 pt-16 sm:px-6 sm:pt-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+      <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
         {/* Product details */}
         <div className="lg:max-w-lg lg:self-end">
           <div className="mt-4">
@@ -141,13 +171,34 @@ export default async function ItemPage({ params: { category, name } }: Props) {
 
         {/* Product form */}
         <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
-          {category === "nespresso-capsules" && (
-            <section aria-labelledby="options-heading">
-              <h2 id="options-heading" className="sr-only">
-                Product Information
-              </h2>
-            </section>
-          )}
+          <section aria-labelledby="options-heading">
+            <h2 id="options-heading" className="sr-only">
+              Product Information
+            </h2>
+            {Object.keys(validatedInformationField.flavourProfile).map(
+              (flavour) => (
+                <div className="flex gap-2" key={flavour}>
+                  <h3 className="w-32 text-sm uppercase">{flavour}</h3>
+                  <div className="flex items-center gap-2">
+                    {[0, 1, 2, 3, 4].map((rating) => (
+                      <div
+                        key={rating}
+                        className={classNames(
+                          validatedInformationField.flavourProfile[
+                            flavour as keyof coffeeInfo
+                          ] > rating
+                            ? "bg-zinc-200"
+                            : "bg-zinc-600",
+                          "h-1 w-12 flex-shrink-0"
+                        )}
+                        aria-hidden="true"
+                      />
+                    ))}
+                  </div>
+                </div>
+              )
+            )}
+          </section>
         </div>
       </div>
       {/* Reviews */}
@@ -226,15 +277,21 @@ export default async function ItemPage({ params: { category, name } }: Props) {
                     </p>
                   </div>
 
-                  <div className="mt-4 lg:mt-6 xl:col-span-2 xl:mt-0">
+                  <div className="xl:col-span-2">
                     <p className="text-base">{rating.comment}</p>
                   </div>
                 </div>
 
-                <div className="mt-6 flex items-center text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex-col lg:items-start xl:col-span-3">
+                <div className="mt-6 flex items-center gap-2 text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 xl:col-span-3">
                   <UserGuard id={rating.userSecretId}>
                     <form action={deleteRating}>
-                      <button type="submit">Delete</button>
+                      <button
+                        type="submit"
+                        className="flex items-center justify-center rounded-lg bg-rose-500 p-2 hover:bg-rose-600"
+                      >
+                        <span className="sr-only">Delete</span>
+                        <TrashIcon className="h-3" />
+                      </button>
                       <input type="hidden" name="ratingId" value={rating.id} />
                       <input
                         type="hidden"

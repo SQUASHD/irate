@@ -8,7 +8,7 @@ export default function RootLayout({
   return (
     <>
       <NavBar />
-      {children}
+      <main className="h-full py-24">{children}</main>
     </>
   );
 }
