@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { env } from "@/env.mjs";
-import { informationFieldSchema } from "@/app/(app)/category/[category]/[name]/Types";
+import { informationFieldSchema } from "@/app/category/[category]/[name]/Types";
 import { prisma } from "@/lib/db";
 import { notFound, redirect } from "next/navigation";
 export default async function AddItemPage() {
@@ -35,38 +35,40 @@ export default async function AddItemPage() {
       },
     });
 
-    const item = await prisma.item.create({
-      data: {
-        name: capsuleName,
-        description: description,
-        href: purchaseHref,
-        categoryId: "nespresso-capsules",
-        images: {
-          create: {
-            href: imageHref,
-            alt: capsuleName,
+    try {
+      await prisma.item.create({
+        data: {
+          name: capsuleName,
+          description: description,
+          href: purchaseHref,
+          categoryId: "nespresso-capsules",
+          images: {
+            create: {
+              href: imageHref,
+              alt: capsuleName,
+            },
+          },
+          informationField: {
+            capsuleType: "Vertuo",
+            tagLine: tagLine,
+            cupSize: cupSize,
+            intensity: parseInt(intensity),
+            notes: aromaticNotes,
+            flavourProfile: {
+              bitterness: parseInt(bitterness),
+              acidity: parseInt(acidity),
+              roast: parseInt(roast),
+              body: parseInt(body),
+            },
           },
         },
-        informationField: {
-          capsuleType: "Vertuo",
-          tagLine: tagLine,
-          cupSize: cupSize,
-          intensity: parseInt(intensity),
-          notes: aromaticNotes,
-          flavourProfile: {
-            bitterness: parseInt(bitterness),
-            acidity: parseInt(acidity),
-            roast: parseInt(roast),
-            body: parseInt(body),
-          },
-        },
-      },
-    });
-    if (item) {
-      redirect(`/category/nespresso-capsules/${item.id}`);
+      });
+    } catch (error) {
+      console.error(error);
     }
+    const href = `/category/nespresso-capsules/${encodeURI(capsuleName)}`;
+    redirect(href);
   }
-
   if (userId !== env.CLERK_ADMIN_ID) {
     notFound();
   }
