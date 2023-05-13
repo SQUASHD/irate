@@ -1,8 +1,9 @@
 import { auth } from "@clerk/nextjs/server";
 import { env } from "@/env.mjs";
-import { informationFieldSchema } from "@/app/(app)/categories/nespresso-capsules/[name]/Types";
 import { prisma } from "@/lib/db";
 import { notFound, redirect } from "next/navigation";
+import { informationFieldSchema } from "@/app/(app)/categories/nespresso-capsules/Types";
+
 export default async function AddItemPage() {
   const { userId } = auth();
 
