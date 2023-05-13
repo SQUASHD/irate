@@ -30,7 +30,7 @@ export default async function AddItemButton({
     return null;
   }
   return (
-    <Link href={`/category/${segmentSlug}/add`} className="group">
+    <Link href={`/categories/${segmentSlug}/add`} className="group">
       <div className="group flex h-48 w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-zinc-200">
         <PlusIcon className="h-full p-8 text-zinc-400 group-hover:text-zinc-500" />
       </div>
