@@ -8,6 +8,7 @@ import { auth } from "@clerk/nextjs";
 import UserGuard from "@/components/UserGuard";
 import { addUserData } from "@/utils/addUserData";
 import { informationFieldSchema } from "@/app/(app)/categories/nespresso-capsules/Types";
+import IntensityField from "@/app/(app)/categories/nespresso-capsules/[name]/IntensityField";
 
 export const revalidate = 3600; // revalidate every hour
 
@@ -156,6 +157,10 @@ export default async function ItemPage({ params: { category, name } }: Props) {
             <h2 id="options-heading" className="sr-only">
               Product Information
             </h2>
+            <div className="mb-4 flex gap-2">
+              <h3 className="w-32 text-sm uppercase">Intensity</h3>
+              <IntensityField intensity={validatedInformationField.intensity} />
+            </div>
             {Object.keys(validatedInformationField.flavourProfile).map(
               (flavour) => (
                 <div className="flex gap-2" key={flavour}>
