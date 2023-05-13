@@ -13,7 +13,7 @@ export default function NavBar() {
         <div className="mx-auto flex max-w-2xl items-center justify-between px-4 py-4 sm:px-6 lg:max-w-7xl lg:px-8">
           <div className="flex items-center gap-8">
             <IrateLogo className="h-6" />
-            <div className="hidden gap-4 sm:block">
+            <div className="hidden gap-4 sm:flex">
               <ClientSideDesktopNav />
             </div>
           </div>
