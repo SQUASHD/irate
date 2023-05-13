@@ -28,7 +28,7 @@ export default async function CategoriesPage() {
           {categories.map((category) => (
             <Link
               key={category.id}
-              href={`/category/${category.slug}`}
+              href={`/categories/${category.slug}`}
               className="group"
             >
               <div className="h-48 w-full overflow-hidden rounded-lg bg-zinc-200">

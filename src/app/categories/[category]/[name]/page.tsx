@@ -2,10 +2,10 @@ import { StarIcon } from "@/assets/icons";
 import { prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
 import { informationFieldSchema } from "./Types";
-import NewImageUrl from "@/app/category/[category]/[name]/NewImageUrl";
-import AuthGuardedToggle from "@/components/NavBar/AuthGuardedToggle";
+import NewImageUrl from "@/app/categories/[category]/[name]/NewImageUrl";
+import AuthGuardedToggle from "@/components/AuthGuardedToggle";
 import { Metadata } from "next";
-import { addRating } from "@/server/actions";
+import { addRating, deleteRating } from "@/server/actions";
 import { auth, clerkClient } from "@clerk/nextjs";
 import { Rating } from "@prisma/client";
 import UserGuard from "@/components/UserGuard";
@@ -128,7 +128,14 @@ export default async function ItemPage({ params: { category, name } }: Props) {
                   </p>
                 </div>
                 <p className="ml-2 text-sm">
-                  {totalReviews.totalCount} reviews
+                  {totalReviews.totalCount} review
+                  <span
+                    className={`${
+                      totalReviews.totalCount === 1 ? "hidden" : ""
+                    }`}
+                  >
+                    s
+                  </span>
                 </p>
               </div>
             </div>
@@ -277,7 +284,16 @@ export default async function ItemPage({ params: { category, name } }: Props) {
 
                 <div className="mt-6 flex items-center text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex-col lg:items-start xl:col-span-3">
                   <UserGuard id={rating.userSecretId}>
-                    <div>Delete</div>
+                    <form action={deleteRating}>
+                      <button type="submit">Delete</button>
+                      <input type="hidden" name="ratingId" value={rating.id} />
+                      <input
+                        type="hidden"
+                        name="categoryName"
+                        value={category}
+                      />
+                      <input type="hidden" name="itemName" value={name} />
+                    </form>
                   </UserGuard>
                   <p className="font-medium">{rating.userId}</p>
                 </div>

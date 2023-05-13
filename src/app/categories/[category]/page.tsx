@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
-import AddItemButton from "@/app/category/[category]/AddItem";
+import AddItemButton from "@/app/categories/[category]/AddItem";
 
 export const revalidate = 3600; // revalidate every hour
 interface Props {
@@ -36,7 +36,7 @@ export default async function CategoryPage({ params: { category } }: Props) {
           {items.map((item) => (
             <Link
               key={item.id}
-              href={`/category/${category}/${encodeURI(item.name)}`}
+              href={`/categories/${category}/${encodeURI(item.name)}`}
               className="group"
             >
               <div className="h-48 w-full overflow-hidden rounded-lg bg-zinc-200">

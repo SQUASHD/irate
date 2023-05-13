@@ -60,3 +60,15 @@ export async function addRating(formData: FormData) {
   }
   revalidatePath(`/categories/${newRating.itemId}`);
 }
+
+export async function deleteRating(formData: FormData) {
+  const ratingId = formData.get("ratingId");
+  const categoryName = formData.get("categoryName");
+  const itemName = formData.get("itemName");
+  await prisma.rating.delete({
+    where: {
+      id: parseInt(ratingId as string),
+    },
+  });
+  revalidatePath(`/category/${categoryName}/${itemName}`);
+}
