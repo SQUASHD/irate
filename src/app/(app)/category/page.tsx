@@ -2,6 +2,8 @@ import Link from "next/link";
 import { prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
 
+export const revalidate = 3600; // revalidate every hour
+
 async function getCategories() {
   return prisma.category.findMany({
     include: {

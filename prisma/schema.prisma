@@ -48,19 +48,11 @@ model Rating {
   comment   String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  itemsId   Int
-  items     Item     @relation(fields: [itemsId], references: [id])
-  user      User     @relation(fields: [userId], references: [id])
+  itemId    Int
+  item      Item     @relation(fields: [itemId], references: [id])
   userId    String
-}
 
-model User {
-  id        String   @id
-  name      String
-  email     String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  ratings   Rating[]
+  @@index([userId])
 }
 
 model Image {
