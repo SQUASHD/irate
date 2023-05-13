@@ -38,6 +38,7 @@ export default async function CategoryPage({ params: { category } }: Props) {
               key={item.id}
               href={`/categories/${category}/${encodeURI(item.name)}`}
               className="group"
+              prefetch={true}
             >
               <div className="h-48 w-full overflow-hidden rounded-lg bg-zinc-200">
                 <img

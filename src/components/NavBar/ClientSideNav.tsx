@@ -23,6 +23,7 @@ export function ClientSideDesktopNav() {
         <Link
           href={item.href}
           key={item.label}
+          prefetch={true}
           className={`${
             pathname === item.href ? "bg-zinc-800/60" : "hover:bg-zinc-800/60"
           } rounded-lg p-2 text-sm font-light`}
@@ -59,6 +60,7 @@ export function ClientSideMobileNav() {
               <Menu.Item key={item.label}>
                 <Link
                   href={item.href}
+                  prefetch={true}
                   className="bg-black bg-opacity-20 p-2 px-4 hover:bg-opacity-30"
                 >
                   {item.label}

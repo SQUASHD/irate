@@ -29,6 +29,7 @@ export default async function CategoriesPage() {
             key={category.id}
             href={`/categories/${category.slug}`}
             className="group"
+            prefetch={true}
           >
             <div className="h-48 w-full overflow-hidden rounded-lg bg-zinc-200">
               <img
