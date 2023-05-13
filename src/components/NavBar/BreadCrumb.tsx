@@ -10,7 +10,7 @@ export default function BreadCrumb() {
   });
 
   return (
-    <nav>
+    <nav className="mx-auto flex max-w-2xl items-center justify-between px-4 py-4 sm:px-6 lg:max-w-7xl lg:px-8">
       <ul className="flex flex-wrap items-center text-xs uppercase sm:text-sm">
         {segments.length > 0 ? (
           <li>
@@ -18,7 +18,7 @@ export default function BreadCrumb() {
               href="/"
               className="group relative inline-block text-zinc-100 transition duration-300"
             >
-              Hjem
+              Home
               <span className="relative bottom-1 block h-[1px] max-w-0 bg-zinc-200 transition-all duration-500 group-hover:max-w-full"></span>
             </Link>
           </li>
@@ -37,7 +37,7 @@ export default function BreadCrumb() {
                 <span className="relative bottom-1 block h-[1px] max-w-0 bg-current transition-all duration-500 group-hover:max-w-full"></span>
               </Link>
             ) : (
-              <span className="text-sky-400">
+              <span className="text-amber-400">
                 {decodeURI(segment).replace("-", " ")}
               </span>
             )}
