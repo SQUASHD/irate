@@ -25,7 +25,10 @@ export function ClientSideDesktopNav() {
           key={item.label}
           prefetch={true}
           className={`${
-            pathname === item.href ? "bg-zinc-800/60" : "hover:bg-zinc-800/60"
+            (pathname.startsWith(item.href) && item.href !== "/") ||
+            pathname === item.href
+              ? "bg-zinc-800/60"
+              : "hover:bg-zinc-800/60"
           } rounded-lg p-2 text-sm font-light`}
         >
           {item.label}
