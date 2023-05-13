@@ -2,6 +2,8 @@ import Link from "next/link";
 import { prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
 import AddItemButton from "@/app/(app)/categories/[category]/AddItem";
+import { Metadata } from "next";
+import { toTitleCase } from "@/utils/formatString";
 
 export const revalidate = 3600; // revalidate every hour
 interface Props {
@@ -10,8 +12,8 @@ interface Props {
   };
 }
 
-export default async function CategoryPage({ params: { category } }: Props) {
-  const items = await prisma.item.findMany({
+async function getCategoryItems({ params: { category } }: Props) {
+  return prisma.item.findMany({
     where: {
       category: {
         slug: category,
@@ -21,7 +23,16 @@ export default async function CategoryPage({ params: { category } }: Props) {
       images: true,
     },
   });
+}
+export async function generateMetadata({
+  params: { category },
+}: Props): Promise<Metadata> {
+  const formattedString = toTitleCase(category.replace("-", " "));
+  return { title: formattedString };
+}
 
+export default async function CategoryPage({ params: { category } }: Props) {
+  const items = await getCategoryItems({ params: { category } });
   if (items.length < 1 || !items) {
     notFound();
   }

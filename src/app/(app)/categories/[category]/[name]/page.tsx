@@ -7,6 +7,8 @@ import { addRating, deleteRating } from "@/server/actions";
 import { auth } from "@clerk/nextjs";
 import UserGuard from "@/components/UserGuard";
 import { addUserData } from "@/utils/addUserData";
+import { Metadata } from "next";
+import { toTitleCase } from "@/utils/formatString";
 
 export const revalidate = 3600; // revalidate every hour
 
@@ -41,6 +43,13 @@ async function getItemData(name: string, category: string) {
       ratings: true,
     },
   });
+}
+
+export async function generateMetadata({
+  params: { name },
+}: Props): Promise<Metadata> {
+  const formattedString = toTitleCase(name);
+  return { title: formattedString };
 }
 
 export default async function ItemPage({ params: { category, name } }: Props) {

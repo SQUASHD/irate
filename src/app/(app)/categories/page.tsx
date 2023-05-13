@@ -12,6 +12,12 @@ async function getCategories() {
   });
 }
 
+export const metadata = {
+  title: "Categories | iRate",
+  description:
+    "All the categories you would ever possibly want to rate when it comes to Nespresso vertuo coffee capsules",
+};
+
 export default async function CategoriesPage() {
   const categories = await getCategories();
 

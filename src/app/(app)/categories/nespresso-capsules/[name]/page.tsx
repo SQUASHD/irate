@@ -9,6 +9,7 @@ import UserGuard from "@/components/UserGuard";
 import { addUserData } from "@/utils/addUserData";
 import { informationFieldSchema } from "@/app/(app)/categories/nespresso-capsules/Types";
 import IntensityField from "@/app/(app)/categories/nespresso-capsules/[name]/IntensityField";
+import { Metadata } from "next";
 
 export const revalidate = 3600; // revalidate every hour
 
@@ -50,6 +51,12 @@ async function getNespressoCapsule(name: string, category: string) {
       ratings: true,
     },
   });
+}
+
+export async function generateMetadata({
+  params: { name },
+}: Props): Promise<Metadata> {
+  return { title: `${decodeURI(name)} | Nespresso Capsules` };
 }
 
 export default async function ItemPage({ params: { category, name } }: Props) {
