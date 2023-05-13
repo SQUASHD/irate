@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
-import AddItemButton from "@/app/categories/[category]/AddItem";
+import AddItemButton from "@/app/(app)/categories/[category]/AddItem";
 
 export const revalidate = 3600; // revalidate every hour
 interface Props {
