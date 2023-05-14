@@ -7,6 +7,19 @@ and I will make an attempt to adhere to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+## [0.5.0] - 2023-05-14
+
+### Added
+- Added functionality to create new categories
+
+### Changed
+- Changed from using notFound API to alerting user of missing data
+
+## [0.4.1] - 2023-05-14
+
+### Fixed
+- Fixed bug where mobile nav wasn't working
+
 ## [0.4.0] - 2023-05-14
 
 ### Added
