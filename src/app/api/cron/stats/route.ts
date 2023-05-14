@@ -8,9 +8,7 @@ const redis = Redis.fromEnv({
   agent: new https.Agent({ keepAlive: true }),
 });
 
-export const config = {
-  runtime: "edge",
-};
+export const runtime = "edge";
 
 export default async function handler(req: NextRequest) {
   const cron = req.nextUrl.pathname.split("/")[3];
