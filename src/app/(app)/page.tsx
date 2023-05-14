@@ -1,4 +1,7 @@
-import { IrateLogo } from "@/assets/icons";
+import Hero from "@/components/Hero";
+import Stats from "@/components/Stats";
+import Testimonial from "@/components/Testimonial";
+import Features from "@/components/Features";
 
 export const metadata = {
   title: "iRate",
@@ -7,10 +10,12 @@ export const metadata = {
 };
 export default function Home() {
   return (
-    <div className="bg-zing-800 flex h-full w-screen flex-col items-center justify-center gap-2">
-      <h1 className="sr-only">iRate</h1>
-      <IrateLogo className="h-12" />
-      <h2 className="">Coming Soon</h2>
-    </div>
+    <>
+      <Hero />
+      {/* @ts-expect-error */}
+      <Stats />
+      <Features />
+      <Testimonial />
+    </>
   );
 }

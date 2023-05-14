@@ -63,7 +63,7 @@ export default function FilterBar() {
                         name="rated[]"
                         defaultValue={option.value}
                         type="radio"
-                        className="h-4 w-4 flex-shrink-0 rounded border-gray-300 focus:ring-indigo-500"
+                        className="h-4 w-4 flex-shrink-0 rounded border-gray-300 focus:ring-amber-500"
                         defaultChecked={option.checked}
                         checked={option.value === searchParams.get("rated")}
                         onClick={() => {

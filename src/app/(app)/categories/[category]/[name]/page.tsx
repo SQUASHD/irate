@@ -176,7 +176,7 @@ export default async function ItemPage({ params: { category, name } }: Props) {
                 <label htmlFor="ratingScore">Rating</label>
                 <select
                   name="ratingScore"
-                  className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 [&_*]:text-black"
+                  className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-amber-500 sm:text-sm sm:leading-6 [&_*]:text-black"
                 >
                   {[5, 4, 3, 2, 1].map((rating) => (
                     <option key={rating} value={rating}>
@@ -190,7 +190,7 @@ export default async function ItemPage({ params: { category, name } }: Props) {
                 <input
                   type="submit"
                   value="Submit"
-                  className="col-span-1 block w-full cursor-pointer rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 hover:bg-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                  className="col-span-1 block w-full cursor-pointer rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 hover:bg-white/10 focus:ring-2 focus:ring-inset focus:ring-amber-500 sm:text-sm sm:leading-6"
                 />
               </div>
               <div className="col-span-2 flex flex-col">
@@ -198,7 +198,7 @@ export default async function ItemPage({ params: { category, name } }: Props) {
                 <textarea
                   name="comment"
                   rows={4}
-                  className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-amber-500 sm:text-sm sm:leading-6"
                 />
               </div>
               <br />

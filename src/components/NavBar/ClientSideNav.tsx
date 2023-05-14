@@ -13,6 +13,7 @@ type NavigationItem = {
 export const navigation: NavigationItem[] = [
   { label: "Home", href: "/" },
   { label: "Categories", href: "/categories" },
+  { label: "About", href: "/about" },
 ];
 
 export function ClientSideDesktopNav() {
