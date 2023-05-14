@@ -1,7 +1,7 @@
-import Hero from "@/components/Hero";
-import Stats from "@/components/Stats";
-import Testimonial from "@/components/Testimonial";
-import Features from "@/components/Features";
+import Hero from "@/components/LandingPage/Hero";
+import Stats from "@/components/LandingPage/Stats";
+import Testimonial from "@/components/LandingPage/Testimonial";
+import Features from "@/components/LandingPage/Features";
 
 export const metadata = {
   title: "iRate",
