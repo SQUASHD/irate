@@ -7,7 +7,7 @@ import { auth } from "@clerk/nextjs";
 import { Filter } from "@/components/Filter";
 
 export const revalidate = 3600; // revalidate every hour
-interface Props {
+export interface CategoryProps {
   params: {
     category: string;
   };
@@ -29,7 +29,7 @@ function sanitizeItems(
   });
 }
 
-async function getCategoryItems({ params: { category } }: Props) {
+async function getCategoryItems({ params: { category } }: CategoryProps) {
   return prisma.item.findMany({
     where: {
       category: {
@@ -49,12 +49,14 @@ async function getCategoryItems({ params: { category } }: Props) {
 }
 export async function generateMetadata({
   params: { category },
-}: Props): Promise<Metadata> {
+}: CategoryProps): Promise<Metadata> {
   const formattedString = toTitleCase(category.replace("-", " "));
   return { title: formattedString };
 }
 
-export default async function CategoryPage({ params: { category } }: Props) {
+export default async function CategoryPage({
+  params: { category },
+}: CategoryProps) {
   const { userId } = auth();
   if (!userId) return null;
 
