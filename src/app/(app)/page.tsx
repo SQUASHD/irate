@@ -8,7 +8,7 @@ export const metadata = {
   description:
     "Your one stop shop for rating Nespresso capsules. You're welcome, dad.",
 };
-export default function Home() {
+export default async function Home() {
   return (
     <>
       <Hero />

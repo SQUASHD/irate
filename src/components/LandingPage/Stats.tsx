@@ -1,36 +1,17 @@
-import { clerkClient } from "@clerk/nextjs";
-import { prisma } from "@/lib/db";
+import { Redis } from "@upstash/redis";
+import https from "https";
 
-async function getUserCount() {
-  return clerkClient.users.getCount();
-}
+const redis = Redis.fromEnv({
+  agent: new https.Agent({ keepAlive: true }),
+});
 
-async function getRatingCount() {
-  return prisma.rating.count();
-}
-
-async function getItemCount() {
-  return prisma.item.count();
-}
-
-async function getCategoryCount() {
-  return prisma.category.count();
-}
-
-async function getStats() {
-  const userCount = await getUserCount();
-  const ratingCount = await getRatingCount();
-  const itemCount = await getItemCount();
-  const categoryCount = await getCategoryCount();
-  return [
-    { id: 1, name: "Registered users", value: userCount },
-    { id: 2, name: "Ratings made", value: ratingCount },
-    { id: 3, name: "Items ready for rating", value: itemCount },
-    { id: 4, name: "Categories to rate", value: categoryCount },
-  ];
-}
 export default async function Stats() {
-  const stats = await getStats();
+  const stats = (await redis.get("stats")) as {
+    id: number;
+    name: string;
+    value: number;
+  }[];
+
   return (
     <div className="py-8">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
