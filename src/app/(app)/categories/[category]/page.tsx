@@ -1,10 +1,8 @@
-import Link from "next/link";
 import { prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
 import AddItemButton from "@/app/(app)/categories/[category]/AddItem";
 import { Metadata } from "next";
 import { toTitleCase } from "@/utils/formatString";
-import FilterBar from "@/components/FilterBar";
 import { Image, Item } from "@prisma/client";
 import { auth } from "@clerk/nextjs";
 import { Filter } from "@/components/Filter";
@@ -60,7 +58,6 @@ export async function generateMetadata({
 export default async function CategoryPage({ params: { category } }: Props) {
   const { userId } = auth();
   if (!userId) return null;
-  console.log(userId);
 
   const items = await getCategoryItems({ params: { category } });
   const sanitizedItems = sanitizeItems(items, userId);
@@ -70,15 +67,11 @@ export default async function CategoryPage({ params: { category } }: Props) {
 
   return (
     <>
-      <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-        <FilterBar />
-        <h2 className="sr-only">Products</h2>
-
-        <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-          {/* @ts-expect-error */}
-          <AddItemButton segmentSlug={`${category}`} />
-          <Filter items={sanitizedItems} userId={userId} />
-        </div>
+      <h2 className="sr-only">Items</h2>
+      <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+        {/* @ts-expect-error */}
+        <AddItemButton segmentSlug={`${category}`} />
+        <Filter items={sanitizedItems} userId={userId} />
       </div>
     </>
   );

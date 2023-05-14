@@ -30,7 +30,6 @@ export function Filter({ items, userId }: FilterProps) {
       }
     });
   }
-  console.log(filteredItems);
   return (
     <>
       {filteredItems.map((item) => (

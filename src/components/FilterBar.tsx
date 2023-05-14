@@ -6,7 +6,7 @@ import { ChevronUpIcon, FunnelIcon } from "@heroicons/react/20/solid";
 
 const filters = {
   rated: [
-    { value: "", label: "None", checked: false },
+    { value: "", label: "All", checked: false },
     { value: "true", label: "Rated", checked: false },
     { value: "false", label: "Unrated", checked: false },
   ],
@@ -79,7 +79,7 @@ export default function FilterBar() {
                       />
                       <label
                         htmlFor={`rated-${optionIdx}`}
-                        className="ml-3 min-w-0 flex-1 text-gray-600"
+                        className="ml-3 min-w-0 flex-1"
                       >
                         {option.label}
                       </label>
