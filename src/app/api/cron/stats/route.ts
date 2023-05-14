@@ -3,12 +3,9 @@ import { Redis } from "@upstash/redis";
 import { clerkClient } from "@clerk/nextjs";
 import { prisma } from "@/lib/db";
 
-const redis = Redis.fromEnv({});
+const redis = Redis.fromEnv();
 
 export async function GET(req: NextRequest) {
-  const cron = req.nextUrl.pathname.split("/")[3];
-  console.log(cron);
-  if (!cron) return new Response("No cron provided", { status: 400 });
   const userCount = await clerkClient.users.getCount();
   const ratingCount = await prisma.rating.count();
   const itemCount = await prisma.item.count();
