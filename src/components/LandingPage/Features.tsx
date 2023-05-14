@@ -4,14 +4,14 @@ import {
   UserGroupIcon,
   FingerPrintIcon,
   CircleStackIcon,
-  StarIcon,
+  EyeSlashIcon,
 } from "@heroicons/react/20/solid";
 
 const features = [
   {
     name: "Rate and Review.",
     description:
-      "Dive into a unique user experience by adding ratings and reviews. Our platform ensures transparency and helps build trust within your community.",
+      "Dive into a unique user experience by adding ratings, reviews and favourites.",
     icon: HeartIcon,
   },
   {
@@ -39,10 +39,10 @@ const features = [
     icon: UserGroupIcon,
   },
   {
-    name: "Favourites.",
+    name: "Ethical.",
     description:
-      "Save and organize your favourite ratings and reviews. Easily access the content that matters most to you.",
-    icon: StarIcon,
+      "Only commercial products are allowed to be rated and reviewed. We do not allow any form of hate speech, harassment, or bullying.",
+    icon: EyeSlashIcon,
   },
 ];
 

@@ -1,4 +1,7 @@
 import Link from "next/link";
+import profile from "public/images/profil-blw.jpg";
+import youngDad from "public/images/young_dad.jpg";
+import Image from "next/image";
 
 const timeline = [
   {
@@ -49,16 +52,16 @@ export default function AboutPage() {
                   wanting to really have a go at SSR and using React Server
                   Components and this was the perfect opportunity. It&apos;s
                   also nice to have an actual end user in mind who isn&apos;t
-                  afraid to give feedback and make requests. You can check out
-                  the source code on{" "}
+                  afraid to give feedback and make requests. Source code
+                  available on{" "}
                   <Link href="https://github.com/squashd/irate">
                     <span className="text-amber-400">GitHub</span>
                   </Link>
                   .
                 </p>
               </div>
-              <img
-                src="https://images.unsplash.com/photo-1567532900872-f4e906cbf06a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1280&q=80"
+              <Image
+                src={youngDad}
                 alt=""
                 className="mt-10 aspect-[6/5] w-full max-w-lg rounded-2xl object-cover sm:mt-16 lg:mt-0 lg:max-w-none xl:row-span-2 xl:row-end-2 xl:mt-36"
               />
@@ -105,7 +108,7 @@ export default function AboutPage() {
             <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:min-w-full lg:max-w-none lg:flex-none lg:gap-y-8">
               <div className="lg:col-end-1 lg:w-full lg:max-w-lg lg:pb-8">
                 <h2 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
-                  Who am I?
+                  The man behind the app
                 </h2>
                 <p className="mt-6 text-xl leading-8 text-zinc-400">
                   I&apos;m just a junior developer who loves to learn new things
@@ -113,46 +116,25 @@ export default function AboutPage() {
                   August 2022, and have been hooked ever since.
                 </p>
                 <p className="mt-6 text-base leading-7 text-zinc-400">
-                  I&apos;m currently looking for work, so if you&apos;re
-                  interested in hiring me, please get in touch. I also do some
-                  freelancing on the side, so if you&apos;re interested in that,
-                  please get in touch as well. You can see more of my work on{" "}
+                  I&apos;m currently looking for work – either employment or
+                  freelance. If you&apos;re interested in hiring me, please get
+                  in touch. You can see more of my work on{" "}
                   <Link href={"https://hjartland.dev"}>
                     <span className="text-amber-400">my portfolio site</span>
                   </Link>
                   .
                 </p>
+                <p className="mt-6 text-sm italic leading-7 text-zinc-400">
+                  NB my portfolio is currently only available in Norwegian.
+                </p>
               </div>
               <div className="flex flex-wrap items-start justify-end gap-6 sm:gap-8 lg:contents">
                 <div className="w-0 flex-auto lg:ml-auto lg:w-auto lg:flex-none lg:self-end">
-                  <img
-                    src="https://images.unsplash.com/photo-1670272502246-768d249768ca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1152&q=80"
+                  <Image
+                    src={profile}
                     alt=""
-                    className="aspect-[7/5] w-[37rem] max-w-none rounded-2xl bg-gray-50 object-cover"
+                    className="w-[24rem] max-w-none rounded-2xl bg-gray-50 object-cover"
                   />
-                </div>
-                <div className="contents lg:col-span-2 lg:col-end-2 lg:ml-auto lg:flex lg:w-[37rem] lg:items-start lg:justify-end lg:gap-x-8">
-                  <div className="order-first flex w-64 flex-none justify-end self-end lg:w-auto">
-                    <img
-                      src="https://images.unsplash.com/photo-1605656816944-971cd5c1407f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=768&h=604&q=80"
-                      alt=""
-                      className="aspect-[4/3] w-[24rem] max-w-none flex-none rounded-2xl bg-gray-50 object-cover"
-                    />
-                  </div>
-                  <div className="flex w-96 flex-auto justify-end lg:w-auto lg:flex-none">
-                    <img
-                      src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1152&h=842&q=80"
-                      alt=""
-                      className="aspect-[7/5] w-[37rem] max-w-none flex-none rounded-2xl bg-gray-50 object-cover"
-                    />
-                  </div>
-                  <div className="hidden sm:block sm:w-0 sm:flex-auto lg:w-auto lg:flex-none">
-                    <img
-                      src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=768&h=604&q=80"
-                      alt=""
-                      className="aspect-[4/3] w-[24rem] max-w-none rounded-2xl bg-gray-50 object-cover"
-                    />
-                  </div>
                 </div>
               </div>
             </div>
