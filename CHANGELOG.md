@@ -7,6 +7,11 @@ and I will make an attempt to adhere to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+## [0.5.1] - 2023-05-14
+
+### Changed
+- Made mobile nav more accessible
+
 ## [0.5.0] - 2023-05-14
 
 ### Added

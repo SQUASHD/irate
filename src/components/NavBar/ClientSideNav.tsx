@@ -67,7 +67,7 @@ export function ClientSideMobileNav() {
               <Menu.Item key={item.label}>
                 <Link
                   href={item.href}
-                  className="bg-black bg-opacity-20 p-2 px-4 hover:bg-opacity-30"
+                  className="bg-black bg-opacity-80 p-2 px-4 hover:bg-opacity-90"
                 >
                   {item.label}
                 </Link>
