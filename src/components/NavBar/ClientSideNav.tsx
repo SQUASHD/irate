@@ -58,12 +58,14 @@ export function ClientSideMobileNav() {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="border-lg absolute mt-2 flex flex-col overflow-hidden rounded-lg">
+          <Menu.Items
+            unmount={false}
+            className="border-lg absolute z-50 mt-2 flex flex-col overflow-hidden rounded-lg"
+          >
             {navigation.map((item) => (
               <Menu.Item key={item.label}>
                 <Link
                   href={item.href}
-                  prefetch={true}
                   className="bg-black bg-opacity-20 p-2 px-4 hover:bg-opacity-30"
                 >
                   {item.label}
