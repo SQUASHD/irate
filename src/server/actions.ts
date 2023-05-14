@@ -63,5 +63,5 @@ export async function deleteRating(formData: FormData) {
       id: parseInt(ratingId as string),
     },
   });
-  revalidatePath(`/category/${categoryName}/${itemName}`);
+  revalidatePath(`/categories/${categoryName}/${itemName}`);
 }
