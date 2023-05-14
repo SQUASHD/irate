@@ -4,21 +4,14 @@ import { auth } from "@clerk/nextjs";
 import { prisma } from "@/lib/db";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
-
-interface AddRating {
-  ratingScore: number;
-  comment: string;
-  itemId: number;
-}
 export async function addRating(formData: FormData) {
   const { userId } = auth();
-  console.log(formData);
 
   if (!userId) throw new Error("Not logged in");
 
   const ratingSchema = z.object({
     ratingScore: z.number().min(1).max(5),
-    comment: z.string().min(1).max(500),
+    comment: z.string().max(500).optional(),
     itemId: z.number(),
   });
 
