@@ -15,9 +15,10 @@ export function Filter({ items, userId }: FilterProps) {
   let filteredItems = items;
 
   const rated = searchParams.get("rated");
+  const search = searchParams.get("search");
 
   if (rated) {
-    filteredItems = items.filter((item) => {
+    filteredItems = filteredItems.filter((item) => {
       const ratings = item.ratings.map((rating) => rating.userId);
       if (rated === "true") {
         // If rated=true, filter items the user has rated
@@ -28,6 +29,11 @@ export function Filter({ items, userId }: FilterProps) {
       } else {
         return ratings;
       }
+    });
+  }
+  if (search) {
+    filteredItems = filteredItems.filter((item) => {
+      return item.name.toLowerCase().includes(search.toLowerCase());
     });
   }
   return (
