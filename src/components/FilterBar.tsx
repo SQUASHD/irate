@@ -3,6 +3,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon, FunnelIcon } from "@heroicons/react/20/solid";
+import SearchBar from "@/components/SearchBar";
 
 const filters = {
   rated: [
@@ -29,12 +30,9 @@ export default function FilterBar() {
   );
 
   return (
-    <>
-      <Disclosure
-        as="section"
-        aria-labelledby="filter-heading"
-        className="py-4"
-      >
+    <div className="grid grid-cols-1 gap-x-6 gap-y-2 py-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+      <SearchBar className="lg:col-span-2 xl:col-span-3" />
+      <Disclosure>
         {({ open }) => (
           <>
             <Disclosure.Button className="flex w-full justify-between rounded-lg bg-black/20 px-4 py-2 text-left text-sm font-medium hover:bg-black/30 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
@@ -50,7 +48,7 @@ export default function FilterBar() {
             </Disclosure.Button>
             <Disclosure.Panel
               unmount={false}
-              className="px-4 pb-2 pt-4 text-sm"
+              className="col-span-full px-4 pb-2 pt-4 text-sm"
             >
               <fieldset>
                 <legend className="block font-medium">Rating Status</legend>
@@ -68,11 +66,11 @@ export default function FilterBar() {
                         className="h-4 w-4 flex-shrink-0 rounded border-gray-300 focus:ring-indigo-500"
                         defaultChecked={option.checked}
                         checked={option.value === searchParams.get("rated")}
-                        onChange={(e) => {
+                        onClick={() => {
                           router.push(
                             `${pathname}?${createQueryString(
                               "rated",
-                              e.target.value
+                              option.value
                             )}`
                           );
                         }}
@@ -91,6 +89,6 @@ export default function FilterBar() {
           </>
         )}
       </Disclosure>
-    </>
+    </div>
   );
 }
