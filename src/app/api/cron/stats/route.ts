@@ -4,8 +4,7 @@ import { clerkClient } from "@clerk/nextjs";
 import { prisma } from "@/lib/db";
 
 const redis = Redis.fromEnv();
-
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
   const userCount = await clerkClient.users.getCount();
   const ratingCount = await prisma.rating.count();
   const itemCount = await prisma.item.count();
