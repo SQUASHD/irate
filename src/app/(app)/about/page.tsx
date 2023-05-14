@@ -4,7 +4,7 @@ const timeline = [
   {
     name: "Conceptualized project",
     description:
-      "Dad mentioned that it would be cool to have a place to rate Nespresso capsules. I thought it was a great idea.",
+      "Dad mentioned that it would be cool to have a place to rate Nespresso capsules.",
     date: "Apr 2023",
     dateTime: "2021-04",
   },
@@ -17,7 +17,7 @@ const timeline = [
   },
   {
     name: "Secured 7kr in funding",
-    description: "I really emptied my wallet to secure the domain name",
+    description: "I really emptied my wallet to secure the domain name.",
     date: "May 2023",
     dateTime: "2023-04",
   },
