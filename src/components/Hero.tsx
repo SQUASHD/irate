@@ -57,7 +57,11 @@ export default function Hero() {
               transform="translate(24 24)"
               clipPath="url(#2ade4387-9c63-4fc4-b754-10e687a0d332)"
             >
-              <Image src={screenshot} alt="" />
+              <Image
+                src={screenshot}
+                alt="Preview of iRate on a mobile screen"
+                priority={true}
+              />
             </foreignObject>
           </svg>
         </div>
