@@ -7,6 +7,12 @@ and I will make an attempt to adhere to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+## [0.5.3] - 2023-05-14
+
+### Fixed
+
+- Fixed filter error caused by missing onChange handler
+
 ## [0.5.2] - 2023-05-14
 
 ### Fixed

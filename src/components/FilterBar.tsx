@@ -61,12 +61,13 @@ export default function FilterBar() {
                       <input
                         id={`rated-${optionIdx}`}
                         name="rated[]"
-                        defaultValue={option.value}
+                        value={option.value}
                         type="radio"
                         className="h-4 w-4 flex-shrink-0 rounded border-gray-300 focus:ring-amber-500"
                         defaultChecked={option.checked}
                         checked={option.value === searchParams.get("rated")}
-                        onChange={() => {
+                        onChange={() => {}}
+                        onClick={() => {
                           router.push(
                             `${pathname}?${createQueryString(
                               "rated",
