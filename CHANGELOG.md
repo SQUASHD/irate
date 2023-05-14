@@ -7,6 +7,17 @@ and I will make an attempt to adhere to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+## [0.4.0] - 2023-05-14
+
+### Added
+- Search functionality
+
+### Changed
+- Filter bar is now in layout component
+
+### Removed
+- Errant console logs
+
 ## [0.3.0] - 2023-05-14
 
 ### Added
