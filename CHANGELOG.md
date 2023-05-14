@@ -7,6 +7,21 @@ and I will make an attempt to adhere to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+## [0.6.0] - 2023-05-14
+
+### Added
+
+- Redis implemented for caching
+- Cron job to update cache
+
+### Changed
+
+- Implmented redis in stats component
+
+### Removed
+
+- Superfluous checked prop on filter
+
 ## [0.5.3] - 2023-05-14
 
 ### Fixed
