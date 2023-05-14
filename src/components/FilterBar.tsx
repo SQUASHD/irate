@@ -66,7 +66,7 @@ export default function FilterBar() {
                         className="h-4 w-4 flex-shrink-0 rounded border-gray-300 focus:ring-amber-500"
                         defaultChecked={option.checked}
                         checked={option.value === searchParams.get("rated")}
-                        onClick={() => {
+                        onChange={() => {
                           router.push(
                             `${pathname}?${createQueryString(
                               "rated",

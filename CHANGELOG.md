@@ -7,6 +7,12 @@ and I will make an attempt to adhere to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+## [0.5.2] - 2023-05-14
+
+### Fixed
+
+- Fixed hydration error caused by using wrong input handler
+
 ## [0.5.1] - 2023-05-14
 
 ### Changed
