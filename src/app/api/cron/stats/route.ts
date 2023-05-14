@@ -1,14 +1,14 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { Redis } from "@upstash/redis";
 import { clerkClient } from "@clerk/nextjs";
-import { prisma } from "@/lib/db";
+import { getCategoryCount, getItemCount, getRatingCount } from "@/server/db";
 
 const redis = Redis.fromEnv();
-export async function POST(req: NextRequest) {
+export async function GET() {
   const userCount = await clerkClient.users.getCount();
-  const ratingCount = await prisma.rating.count();
-  const itemCount = await prisma.item.count();
-  const categoryCount = await prisma.category.count();
+  const ratingCount = getRatingCount();
+  const itemCount = getItemCount();
+  const categoryCount = getCategoryCount();
 
   const stats = [
     { id: 1, name: "Registered users", value: userCount },
