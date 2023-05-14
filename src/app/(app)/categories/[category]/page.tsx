@@ -60,7 +60,6 @@ export default async function CategoryPage({ params: { category } }: Props) {
 
   const items = await getCategoryItems({ params: { category } });
   const sanitizedItems = sanitizeItems(items, userId);
-  console.log(sanitizedItems);
   if (items.length < 1 || !items) {
     return (
       <>
