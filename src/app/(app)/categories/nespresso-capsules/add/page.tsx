@@ -14,7 +14,7 @@ export default async function AddItemPage() {
     const purchaseHref = formData.get("purchaseHref") as string;
     const imageHref = formData.get("imageHref") as string;
     const cupSize = formData.get("cupSize") as string;
-    const tagLine = formData.get("tagLine") as string;
+    const tagLine = formData.get("tagLine");
     const aromaticNotes = formData.get("aromaticNotes") as string;
     const intensity = formData.get("intensity") as string;
     const bitterness = formData.get("bitterness") as string;
@@ -22,7 +22,7 @@ export default async function AddItemPage() {
     const roast = formData.get("roast") as string;
     const body = formData.get("body") as string;
 
-    informationFieldSchema.parse({
+    const data = informationFieldSchema.parse({
       cupSize: cupSize,
       tagLine: tagLine,
       notes: aromaticNotes,
@@ -51,15 +51,15 @@ export default async function AddItemPage() {
           },
           informationField: {
             capsuleType: "Vertuo",
-            tagLine: tagLine,
-            cupSize: cupSize,
-            intensity: parseInt(intensity),
+            tagLine: data.tagLine,
+            cupSize: data.cupSize,
+            intensity: data.intensity,
             notes: aromaticNotes,
             flavourProfile: {
-              bitterness: parseInt(bitterness),
-              acidity: parseInt(acidity),
-              roast: parseInt(roast),
-              body: parseInt(body),
+              bitterness: data.flavourProfile.bitterness,
+              acidity: data.flavourProfile.acidity,
+              roast: data.flavourProfile.roast,
+              body: data.flavourProfile.body,
             },
           },
         },
