@@ -2,9 +2,9 @@ import { prisma } from "@/lib/db";
 import AddItemButton from "@/app/(app)/categories/[category]/AddItem";
 import { Metadata } from "next";
 import { toTitleCase } from "@/utils/formatString";
-import { Image, Item } from "@prisma/client";
 import { auth } from "@clerk/nextjs";
-import { Filter } from "@/components/Filter";
+import ClientGrid from "@/components/ClientGrid";
+import { ItemWithRatingAndImage } from "@/hooks/useFilteredItems";
 
 export const revalidate = 3600; // revalidate every hour
 export interface CategoryProps {
@@ -12,24 +12,16 @@ export interface CategoryProps {
     category: string;
   };
 }
-function sanitizeItems(
-  items: (Item & {
-    ratings: { userId: string; rating: number }[];
-    images: Image[];
-  })[],
-  userId: string
-) {
+function sanitizeItems(items: ItemWithRatingAndImage[], userId: string) {
   return items.map((item) => {
     return {
       ...item,
-      ratings: item.ratings.filter((rating) => {
-        return rating.userId === userId;
-      }),
+      ratings: item.ratings.filter((rating) => rating.userId === userId),
     };
   });
 }
 
-async function getCategoryItems({ params: { category } }: CategoryProps) {
+async function getCategoryItems(category: string) {
   return prisma.item.findMany({
     where: {
       category: {
@@ -60,7 +52,7 @@ export default async function CategoryPage({
   const { userId } = auth();
   if (!userId) return null;
 
-  const items = await getCategoryItems({ params: { category } });
+  const items = await getCategoryItems(category);
   const sanitizedItems = sanitizeItems(items, userId);
   if (items.length < 1 || !items) {
     return (
@@ -86,11 +78,10 @@ export default async function CategoryPage({
   return (
     <>
       <h2 className="sr-only">Items</h2>
-      <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+      <ClientGrid items={sanitizedItems} userId={userId}>
         {/* @ts-expect-error */}
         <AddItemButton segmentSlug={`${category}`} />
-        <Filter items={sanitizedItems} userId={userId} />
-      </div>
+      </ClientGrid>
     </>
   );
 }
