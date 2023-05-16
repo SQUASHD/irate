@@ -2,12 +2,9 @@ import { authMiddleware } from "@clerk/nextjs/server";
 
 export default authMiddleware({
   ignoredRoutes: [],
-  publicRoutes: ["/", "/about"],
+  publicRoutes: ["/", "/about", "/api/cron(.*)"],
 });
 
 export const config = {
-  matcher: [
-    "/(.*?trpc.*?|(?!static|.*\\..*|_next|favicon.ico).*)",
-    "/api/cron(.*)",
-  ],
+  matcher: ["/(.*?trpc.*?|(?!static|.*\\..*|_next|favicon.ico).*)"],
 };
