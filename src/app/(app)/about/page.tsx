@@ -39,7 +39,7 @@ export default function AboutPage() {
       <main className="isolate py-8">
         {/* Hero section */}
         <div className="relative isolate -z-10 overflow-hidden pt-4">
-          <div className="mx-auto max-w-7xl px-6 py-32 sm:py-40 lg:px-8">
+          <div className="mx-auto max-w-7xl px-6 py-16 sm:py-20 lg:px-8">
             <div className="mx-auto max-w-2xl lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-6 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8">
               <h1 className="max-w-2xl text-4xl font-bold tracking-tight text-zinc-100 sm:text-6xl lg:col-span-2 xl:col-auto">
                 A small passion project grown out of my dad&apos;s love for
