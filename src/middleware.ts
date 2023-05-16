@@ -6,5 +6,7 @@ export default authMiddleware({
 });
 
 export const config = {
-  matcher: ["/(.*?trpc.*?|(?!static|.*\\..*|_next|favicon.ico).*)"],
+  matcher: [
+    "/(.*?trpc.*?|(?!static|.*\\..*|_next|favicon.ico|^\\/api\\/cron\\/.*$|^\\/about\\/.*$|^\\/$).*)",
+  ],
 };
