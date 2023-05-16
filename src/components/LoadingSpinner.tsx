@@ -1,9 +1,17 @@
-export default function LoadingSpinner() {
+type LoadingSpinnerProps = { type: "light" } | { type: "dark" };
+
+export default function LoadingSpinner(props: LoadingSpinnerProps) {
+  const { type } = props;
   return (
-    <div role="status" className="h-full w-full">
+    <div
+      role="status"
+      className="flex h-full w-full items-center justify-center"
+    >
       <svg
         aria-hidden="true"
-        className="mr-2 h-8 w-8 animate-spin fill-amber-400 text-zinc-400"
+        className={`${
+          type === "light" ? "text-zinc-200" : "text-zinc-800"
+        } mr-2 h-8 w-8 animate-spin fill-amber-400`}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
