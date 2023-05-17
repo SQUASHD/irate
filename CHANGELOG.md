@@ -43,7 +43,7 @@ and I will make an attempt to adhere to [Semantic Versioning](https://semver.org
 
 ### Changed
 
-- Implmented redis in stats component
+- Implemented redis in stats component
 
 ### Removed
 
