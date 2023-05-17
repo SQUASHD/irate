@@ -7,6 +7,16 @@ and I will make an attempt to adhere to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+## [0.9.0] - 2023-05-17
+
+### Added
+- Favourites functionality
+- Favourites element to profile
+
+### Changed
+- Change server side query to use userID, limiting size of returned data and improving performance
+- Split server actions into separate controller files because MVC is back baby
+
 ## [0.8.0] - 2023-05-17
 
 ### Added
