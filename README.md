@@ -24,8 +24,7 @@ iRate is a web application I've designed to help coffee lovers track and rate th
 Here's a snapshot of what's been done and what's next:
 
 ### To-Do
-- [ ] User Page
-- [ ] Preview ratings on item cards
+- [ ] Let users add categories and items
 
 ### Done
 - [x] List capsules w/ product info
@@ -34,6 +33,7 @@ Here's a snapshot of what's been done and what's next:
 - [x] Functionality to add other items – in progress, working on a more general input form
 - [x] Rating functionality
 - [x] Filtering
+- [x] User Page
 
 ## Change Log
 For details on what's new in each update, you can check out the [change log](CHANGELOG.md).
