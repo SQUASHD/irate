@@ -1,5 +1,4 @@
 import Link from "next/link";
-import LoadingSpinner from "@/components/LoadingSpinner";
 
 type GridCardProps =
   | { type: "empty" }
@@ -41,9 +40,7 @@ const GridCard = (props: GridCardProps) => {
     );
   if (props.type === "loading")
     return (
-      <div className="flex h-48 w-full items-center justify-center overflow-hidden rounded-lg bg-zinc-200">
-        <LoadingSpinner type="dark" />
-      </div>
+      <div className="flex h-48 w-full animate-pulse items-center justify-center overflow-hidden rounded-lg bg-zinc-200"></div>
     );
   return null;
 };
