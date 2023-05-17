@@ -7,6 +7,11 @@ and I will make an attempt to adhere to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+## [0.9.1] - 2023-05-17
+
+### Added
+- Ability to filter by favourited status
+
 ## [0.9.0] - 2023-05-17
 
 ### Added

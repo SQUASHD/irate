@@ -21,6 +21,7 @@ export function useFilteredItems({ items, userId }: UseFilteredItemsProps) {
 
   const rated = searchParams.get("rated");
   const search = searchParams.get("search");
+  const favourited = searchParams.get("favourited");
 
   useEffect(() => {
     let newFilteredItems = items;
@@ -43,8 +44,20 @@ export function useFilteredItems({ items, userId }: UseFilteredItemsProps) {
       });
     }
 
+    if (favourited) {
+      newFilteredItems = newFilteredItems.filter((item) => {
+        if (favourited === "true") {
+          return item.favourites.length > 0 && item.favourites[0].favourited;
+        } else if (favourited === "false") {
+          return item.favourites.length === 0 || !item.favourites[0].favourited;
+        } else {
+          return true;
+        }
+      });
+    }
+
     setFilteredItems(newFilteredItems);
-  }, [items, userId, rated, search]);
+  }, [items, userId, rated, search, favourited]);
 
   return filteredItems;
 }
