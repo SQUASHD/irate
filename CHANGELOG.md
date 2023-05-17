@@ -7,6 +7,23 @@ and I will make an attempt to adhere to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+## [0.8.0] - 2023-05-17
+
+### Added
+- Profile page with recent ratings
+
+## [0.7.0] - 2023-05-16
+
+### Added
+
+- Skeleton loading for items
+- Animations for filter and search
+
+### Changed
+
+- Refactored filter component to be a hook
+- Made the grid a client component to enable stateful animations
+
 ## [0.6.0] - 2023-05-14
 
 ### Added
