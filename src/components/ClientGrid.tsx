@@ -4,10 +4,12 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { Image, Item } from "@prisma/client";
 import GridCard from "@/components/GridCard";
 import { useFilteredItems } from "@/hooks/useFilteredItems";
+import { FavButton } from "@/components/FavouriteButton";
 
 interface GridProps {
   items: (Item & {
-    ratings: { userId: string; rating: number }[];
+    ratings: { rating: number }[];
+    favourites: { favourited: boolean }[];
     images: Image[];
   })[];
   userId: string;
@@ -32,7 +34,15 @@ export default function ClientGrid({ items, userId, children }: GridProps) {
           category={item.categoryId}
           name={item.name}
           images={item.images}
-        />
+        >
+          <FavButton
+            itemId={item.id}
+            userId={userId}
+            favourited={
+              item.favourites.length === 1 && item.favourites[0].favourited
+            }
+          />
+        </GridCard>
       ))}
     </ul>
   );
