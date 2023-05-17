@@ -1,35 +1,35 @@
 import {
   MagnifyingGlassIcon,
-  HeartIcon,
+  StarIcon,
   UserGroupIcon,
   FingerPrintIcon,
   CircleStackIcon,
-  EyeSlashIcon,
+  HeartIcon,
 } from "@heroicons/react/20/solid";
 
 const features = [
   {
     name: "Rate and Review.",
     description:
-      "Dive into a unique user experience by adding ratings, reviews and favourites.",
-    icon: HeartIcon,
+      "Easily rate and review your favourite products. You can also edit and delete your ratings and reviews at any time.",
+    icon: StarIcon,
   },
   {
     name: "Persistent Data.",
     description:
-      "We offer persistent data storage feature, ensuring that your ratings and reviews are securely stored and readily accessible whenever you need them.",
+      "Your ratings and reviews are securely stored and readily accessible whenever you need them.",
     icon: CircleStackIcon,
   },
   {
     name: "Filter & Search.",
     description:
-      "Easily navigate through the vast amounts of data with our filter and search feature. Find the ratings and reviews you're looking for in a matter of seconds.",
+      "Find the ratings and reviews you're looking for in a matter of seconds.",
     icon: MagnifyingGlassIcon,
   },
   {
     name: "Authentication.",
     description:
-      "Our application provides basic authentication mechanisms, ensuring only authorized users have access to certain data and functionalities.",
+      "Only authorized users have access to certain data and functionalities.",
     icon: FingerPrintIcon,
   },
   {
@@ -39,10 +39,10 @@ const features = [
     icon: UserGroupIcon,
   },
   {
-    name: "Ethical.",
+    name: "Only love.",
     description:
-      "Only commercial products are allowed to be rated and reviewed. We do not allow any form of hate speech, harassment, or bullying.",
-    icon: EyeSlashIcon,
+      "Any form of hate speech, harassment, or bullying is strictly prohibited. Only commercial products are allowed to be rated and reviewed.",
+    icon: HeartIcon,
   },
 ];
 

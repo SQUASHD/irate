@@ -25,13 +25,15 @@ Here's a snapshot of what's been done and what's next:
 
 ### To-Do
 - [ ] Let users add categories and items
+- [ ] Add teams/groups
 
 ### Done
 - [x] List capsules w/ product info
 - [x] Data persistence
 - [x] Basic auth
-- [x] Functionality to add other items – in progress, working on a more general input form
+- [x] Functionality to add other items – currently limited to admin
 - [x] Rating functionality
+- [x] Favorites
 - [x] Filtering
 - [x] User Page
 
