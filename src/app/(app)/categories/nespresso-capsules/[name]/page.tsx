@@ -1,4 +1,4 @@
-import { StarIcon, TrashIcon } from "@/assets/icons";
+import { TrashIcon } from "@/assets/icons";
 import { prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
 import NewImageUrl from "@/components/EditingFields/NewImageUrl";
@@ -10,6 +10,7 @@ import { addUserData } from "@/utils/addUserData";
 import { informationFieldSchema } from "@/app/(app)/categories/nespresso-capsules/Types";
 import IntensityField from "@/app/(app)/categories/nespresso-capsules/[name]/IntensityField";
 import { Metadata } from "next";
+import StarReviews from "@/components/StarReviews";
 
 export const revalidate = 3600; // revalidate every hour
 
@@ -104,15 +105,7 @@ export default async function ItemPage({ params: { category, name } }: Props) {
               <div className="flex items-center">
                 <div>
                   <div className="flex items-center">
-                    {[0, 1, 2, 3, 4].map((rating) => (
-                      <StarIcon
-                        key={rating}
-                        className={`${
-                          totalReviews.average > rating ? "text-yellow-400" : ""
-                        } "h-5 w-5 flex-shrink-0`}
-                        aria-hidden="true"
-                      />
-                    ))}
+                    <StarReviews rating={totalReviews.average} />
                   </div>
                   <p className="sr-only">
                     {totalReviews.average} out of 5 stars
@@ -251,18 +244,7 @@ export default async function ItemPage({ params: { category, name } }: Props) {
                 <div className="lg:col-span-8 lg:col-start-5 xl:col-span-9 xl:col-start-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-8">
                   <div className="flex items-center xl:col-span-1">
                     <div className="flex items-center">
-                      {[0, 1, 2, 3, 4].map((ratingScore) => (
-                        <StarIcon
-                          key={ratingScore}
-                          className={classNames(
-                            rating.rating > ratingScore
-                              ? "text-yellow-400"
-                              : "",
-                            "h-5 w-5 flex-shrink-0"
-                          )}
-                          aria-hidden="true"
-                        />
-                      ))}
+                      <StarReviews rating={rating.rating} />
                     </div>
                     <p className="ml-3 text-sm">
                       {rating.rating}
