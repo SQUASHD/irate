@@ -3,7 +3,6 @@ import { prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
 import NewImageUrl from "@/components/EditingFields/NewImageUrl";
 import AuthGuardedToggle from "@/components/AuthGuardedToggle";
-import { addRating, deleteRating } from "@/server/actions";
 import { auth } from "@clerk/nextjs";
 import UserGuard from "@/components/UserGuard";
 import { addUserData } from "@/utils/addUserData";
@@ -11,6 +10,8 @@ import { informationFieldSchema } from "@/app/(app)/categories/nespresso-capsule
 import IntensityField from "@/app/(app)/categories/nespresso-capsules/[name]/IntensityField";
 import { Metadata } from "next";
 import StarReviews from "@/components/StarReviews";
+import { FavButton } from "@/components/FavouriteButton";
+import { addRating, deleteRating } from "@/server/_actions/rating";
 
 export const revalidate = 3600; // revalidate every hour
 
@@ -32,12 +33,12 @@ type coffeeInfo = {
   roast: number;
 };
 
-async function getNespressoCapsule(name: string, category: string) {
+async function getNespressoCapsule(name: string, userId: string) {
   return prisma.item.findFirst({
     where: {
       name: name,
       category: {
-        slug: category,
+        slug: "nespresso-capsules",
       },
     },
     select: {
@@ -50,6 +51,12 @@ async function getNespressoCapsule(name: string, category: string) {
       description: true,
       id: true,
       ratings: true,
+      favourites: {
+        where: {
+          favourited: true,
+          userId: userId,
+        },
+      },
     },
   });
 }
@@ -62,8 +69,10 @@ export async function generateMetadata({
 
 export default async function ItemPage({ params: { category, name } }: Props) {
   const { userId } = auth();
+  if (!userId) return null;
+
   const decodedName = decodeURIComponent(name);
-  const item = await getNespressoCapsule(decodedName.toString(), category);
+  const item = await getNespressoCapsule(decodedName.toString(), userId);
 
   const stylizedRatings = await addUserData(item?.ratings ?? []);
 
@@ -77,9 +86,7 @@ export default async function ItemPage({ params: { category, name } }: Props) {
     totalCount: item?.ratings.length,
   };
 
-  if (!item) {
-    notFound();
-  }
+  if (!item) notFound();
 
   const validatedInformationField = informationFieldSchema.parse(
     item.informationField
@@ -140,12 +147,19 @@ export default async function ItemPage({ params: { category, name } }: Props) {
                   {/* @ts-expect-error */}
                   <NewImageUrl imageId={image.id} />
                 </AuthGuardedToggle>
-                <img
-                  key={image.id}
-                  src={image.href}
-                  alt={image.alt}
-                  className="h-full w-full object-cover object-center"
-                />
+                <div>
+                  <FavButton
+                    itemId={item.id}
+                    userId={userId}
+                    favourited={item?.favourites[0]?.favourited ?? false}
+                  />
+                  <img
+                    key={image.id}
+                    src={image.href}
+                    alt={image.alt}
+                    className="h-full w-full object-cover object-center"
+                  />
+                </div>
               </>
             ))}
           </div>

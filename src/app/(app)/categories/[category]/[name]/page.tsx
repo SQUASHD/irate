@@ -2,13 +2,14 @@ import { prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
 import NewImageUrl from "@/components/EditingFields/NewImageUrl";
 import AuthGuardedToggle from "@/components/AuthGuardedToggle";
-import { addRating, deleteRating } from "@/server/actions";
 import { auth } from "@clerk/nextjs";
 import UserGuard from "@/components/UserGuard";
 import { addUserData } from "@/utils/addUserData";
 import { Metadata } from "next";
 import { toTitleCase } from "@/utils/formatString";
 import StarReviews from "@/components/StarReviews";
+import { FavButton } from "@/components/FavouriteButton";
+import { addRating, deleteRating } from "@/server/_actions/rating";
 
 export const revalidate = 3600; // revalidate every hour
 
@@ -19,7 +20,7 @@ interface Props {
   };
 }
 
-async function getItemData(name: string, category: string) {
+async function getItemData(name: string, category: string, userId: string) {
   return prisma.item.findFirst({
     where: {
       name: name,
@@ -37,6 +38,12 @@ async function getItemData(name: string, category: string) {
       description: true,
       id: true,
       ratings: true,
+      favourites: {
+        where: {
+          favourited: true,
+          userId: userId,
+        },
+      },
     },
   });
 }
@@ -50,8 +57,10 @@ export async function generateMetadata({
 
 export default async function ItemPage({ params: { category, name } }: Props) {
   const { userId } = auth();
+  if (!userId) return null;
+
   const decodedName = decodeURI(name);
-  const item = await getItemData(decodedName.toString(), category);
+  const item = await getItemData(decodedName.toString(), category, userId);
 
   const stylizedRatings = await addUserData(item?.ratings ?? []);
 
@@ -65,9 +74,7 @@ export default async function ItemPage({ params: { category, name } }: Props) {
     totalCount: item?.ratings.length,
   };
 
-  if (!item) {
-    notFound();
-  }
+  if (!item) notFound();
 
   return (
     <>
@@ -130,7 +137,13 @@ export default async function ItemPage({ params: { category, name } }: Props) {
                   src={image.href}
                   alt={image.alt}
                   className="h-full w-full object-cover object-center"
-                />
+                >
+                  <FavButton
+                    itemId={item.id}
+                    userId={userId}
+                    favourited={item?.favourites[0]?.favourited ?? false}
+                  />
+                </img>
               </>
             ))}
           </div>

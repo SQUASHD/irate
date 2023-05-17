@@ -4,7 +4,6 @@ import { Metadata } from "next";
 import { toTitleCase } from "@/utils/formatString";
 import { auth } from "@clerk/nextjs";
 import ClientGrid from "@/components/ClientGrid";
-import { ItemWithRatingAndImage } from "@/hooks/useFilteredItems";
 
 export const revalidate = 3600; // revalidate every hour
 export interface CategoryProps {
@@ -12,16 +11,8 @@ export interface CategoryProps {
     category: string;
   };
 }
-function sanitizeItems(items: ItemWithRatingAndImage[], userId: string) {
-  return items.map((item) => {
-    return {
-      ...item,
-      ratings: item.ratings.filter((rating) => rating.userId === userId),
-    };
-  });
-}
 
-async function getCategoryItems(category: string) {
+async function getCategoryItems(category: string, userId: string) {
   return prisma.item.findMany({
     where: {
       category: {
@@ -31,9 +22,19 @@ async function getCategoryItems(category: string) {
     include: {
       images: true,
       ratings: {
+        where: {
+          userId: userId,
+        },
         select: {
           rating: true,
-          userId: true,
+        },
+      },
+      favourites: {
+        where: {
+          userId: userId,
+        },
+        select: {
+          favourited: true,
         },
       },
     },
@@ -52,8 +53,8 @@ export default async function CategoryPage({
   const { userId } = auth();
   if (!userId) return null;
 
-  const items = await getCategoryItems(category);
-  const sanitizedItems = sanitizeItems(items, userId);
+  const items = await getCategoryItems(category, userId);
+  console.log(items);
   if (items.length < 1 || !items) {
     return (
       <>
@@ -78,7 +79,7 @@ export default async function CategoryPage({
   return (
     <>
       <h2 className="sr-only">Items</h2>
-      <ClientGrid items={sanitizedItems} userId={userId}>
+      <ClientGrid items={items} userId={userId}>
         {/* @ts-expect-error */}
         <AddItemButton segmentSlug={`${category}`} />
       </ClientGrid>
