@@ -33,7 +33,7 @@ const filters: FilterGroup[] = [
     options: [
       { value: "", label: "All", checked: false },
       { value: "true", label: "Favourited", checked: false },
-      { value: "false", label: "Not Favourited", checked: false },
+      { value: "false", label: "Unfavourited", checked: false },
     ],
   },
 ];
