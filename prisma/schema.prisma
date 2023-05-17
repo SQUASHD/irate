@@ -27,17 +27,18 @@ model Category {
 }
 
 model Item {
-  id               Int      @id @default(autoincrement())
+  id               Int         @id @default(autoincrement())
   name             String
   description      String
   href             String
   informationField Json
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-  category         Category @relation(fields: [categoryId], references: [slug])
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+  category         Category    @relation(fields: [categoryId], references: [slug])
   categoryId       String
   ratings          Rating[]
   images           Image[]
+  favourites       Favourite[]
 
   @@index([categoryId], name: "categoryId")
 }
@@ -53,6 +54,16 @@ model Rating {
   userId    String
 
   @@index([userId])
+}
+
+model Favourite {
+  id         Int      @id @default(autoincrement())
+  favourited Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  item       Item     @relation(fields: [itemId], references: [id])
+  itemId     Int
+  userId     String
 }
 
 model Image {
