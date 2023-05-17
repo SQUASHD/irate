@@ -4,7 +4,8 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export interface ItemWithRatingAndImage extends Item {
-  ratings: { userId: string; rating: number }[];
+  ratings: { rating: number }[];
+  favourites: { favourited: boolean }[];
   images: Image[];
 }
 
@@ -26,13 +27,10 @@ export function useFilteredItems({ items, userId }: UseFilteredItemsProps) {
 
     if (rated) {
       newFilteredItems = newFilteredItems.filter((item) => {
-        const ratings = item.ratings.map((rating) => rating.userId);
         if (rated === "true") {
-          // If rated=true, filter items the user has rated
-          return ratings.includes(userId);
+          return item.ratings.length === 1;
         } else if (rated === "false") {
-          // If rated=false, filter items the user hasn't rated
-          return !ratings.includes(userId);
+          return item.ratings.length === 0;
         } else {
           return true;
         }
