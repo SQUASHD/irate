@@ -18,3 +18,9 @@ export const informationFieldSchema = z.object({
     roast: z.number().min(1).max(5),
   }),
 });
+export const createNespressoItemSchema = z.object({
+  name: z.string().min(1).max(40),
+  description: z.string().min(1).max(255),
+  imageHref: z.string().url(),
+  informationField: informationFieldSchema,
+});

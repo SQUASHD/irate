@@ -6,12 +6,12 @@ import AuthGuardedToggle from "@/components/AuthGuardedToggle";
 import { auth } from "@clerk/nextjs";
 import UserGuard from "@/components/UserGuard";
 import { addUserData } from "@/utils/addUserData";
-import { informationFieldSchema } from "@/app/categories/nespresso-capsules/Types";
 import IntensityField from "@/app/categories/nespresso-capsules/[name]/IntensityField";
 import { Metadata } from "next";
 import StarReviews from "@/components/StarReviews";
 import { FavButton } from "@/components/FavouriteButton";
 import { create, destroy } from "@/app/_actions/rating";
+import { informationFieldSchema } from "@/app/categories/nespresso-capsules/_model/model";
 
 export const revalidate = 3600; // revalidate every hour
 
