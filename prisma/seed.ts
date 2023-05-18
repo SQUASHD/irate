@@ -1,6 +1,8 @@
 import { PrismaClient } from ".prisma/client";
+import { env } from "@/env.mjs";
 const prisma = new PrismaClient();
 async function main() {
+  const adminId = env.CLERK_ADMIN_ID;
   await prisma.category.upsert({
     where: { slug: "nespresso-capsules" },
     update: {},
@@ -9,11 +11,12 @@ async function main() {
       slug: "nespresso-capsules",
       description:
         "Nespresso capsules are small, single-serving pods of ground coffee that are designed for use with Nespresso machines. With a variety of flavor options and color-coded intensity levels, Nespresso capsules offer a convenient and customizable coffee experience. Simply insert a capsule, press a button, and enjoy a perfectly brewed cup of coffee or espresso every time.",
-      totalRatings: 0,
+      createdBy: adminId,
       image: {
         create: {
           href: "https://www.nespresso.com/ecom/medias/sys_master/public/13594937819166/M-1241-Desktop-PDP-6272x2432.jpg?impolicy=productPdpSafeZone&imwidth=1238",
           alt: "Nespresso Capsules",
+          addedBy: adminId,
         },
       },
     },
@@ -40,11 +43,13 @@ async function main() {
           roast: 3,
         },
       },
+      createdBy: adminId,
       categoryId: "nespresso-capsules",
       images: {
         create: {
           href: "https://www.nespresso.com/shared_res/agility/n-components/pdp/sku-main-info/coffee-sleeves/vl/double-espresso-scuro_L.png",
           alt: "Double Espresso Scuro",
+          addedBy: adminId,
         },
       },
     },
@@ -71,10 +76,12 @@ async function main() {
         },
       },
       categoryId: "nespresso-capsules",
+      createdBy: adminId,
       images: {
         create: {
           href: "https://www.nespresso.com/shared_res/agility/n-components/pdp/sku-main-info/coffee-sleeves/vl/double-espresso-chiaro_L.png",
           alt: "Double Espresso Chiaro",
+          addedBy: adminId,
         },
       },
     },
@@ -101,10 +108,12 @@ async function main() {
         },
       },
       categoryId: "nespresso-capsules",
+      createdBy: adminId,
       images: {
         create: {
           href: "https://www.nespresso.com/shared_res/agility/n-components/pdp/sku-main-info/coffee-sleeves/vl/costa-rica_L.png",
           alt: "Costa Rica",
+          addedBy: adminId,
         },
       },
     },
