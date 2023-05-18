@@ -12,9 +12,9 @@ export default function Hero() {
           </h1>
           <p className="mt-6 text-lg leading-8 text-zinc-400">
             iRate is a simple, easy to use app that helps you keep track of your
-            favourite things. Whether it&apos;s a Nespresso coffee pod or...
-            well, it&apos;s actually only that at the moment, but iRate helps
-            you remember what you liked and didn&apos;t like about it.
+            favourite things. Whether it&apos;s a Nespresso coffee pod, a movie,
+            a song – iRate helps you remember what you liked and didn&apos;t
+            like about it.
           </p>
           <div className="mt-10 flex items-center gap-x-6">
             <Link

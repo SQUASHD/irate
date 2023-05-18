@@ -9,38 +9,37 @@ import {
 
 const features = [
   {
-    name: "Rate and Review.",
+    name: "Have your say.",
     description:
-      "Easily rate and review your favourite products. You can also edit and delete your ratings and reviews at any time.",
+      "Simply share your thoughts on the products you love. Feel free to revise or remove your comments as you see fit.",
     icon: StarIcon,
   },
   {
     name: "Persistent Data.",
     description:
-      "Your ratings and reviews are securely stored and readily accessible whenever you need them.",
+      "Rest assured, your ratings and reviews are securely tucked away, ready to revisit whenever you wish.",
     icon: CircleStackIcon,
   },
   {
     name: "Filter & Search.",
-    description: "Filter through enormous amounts of data with ease.",
+    description: "Navigate through vast information with absolute ease.",
     icon: MagnifyingGlassIcon,
   },
   {
     name: "Authentication.",
     description:
-      "Only authorized users have access to certain data and functionalities.",
+      "Only authorized users can access certain exclusive data and features.",
     icon: FingerPrintIcon,
   },
   {
     name: "User & Team Pages.",
-    description:
-      "Personal spaces so you can view and compare your ratings and reviews with others. You can also create teams and invite others to join.",
+    description: "Set up your personal space to compare thoughts with others.",
     icon: UserGroupIcon,
   },
   {
-    name: "Only love.",
+    name: "Respectful Interaction.",
     description:
-      "Any form of hate speech, harassment, or bullying is strictly prohibited.",
+      "No hate speech, harassment, or bullying. Let's keep this place friendly.",
     icon: HeartIcon,
   },
 ];

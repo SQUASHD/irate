@@ -2,6 +2,8 @@ import Link from "next/link";
 import profile from "public/images/profil-blw.jpg";
 import youngDad from "public/images/young_dad.jpg";
 import Image from "next/image";
+import StyledLink from "@/components/ui/Links";
+import InDevelopment from "@/components/LandingPage/InDevelopment";
 
 const timeline = [
   {
@@ -36,6 +38,7 @@ const timeline = [
 export default function AboutPage() {
   return (
     <>
+      <InDevelopment />
       <main className="isolate py-8">
         {/* Hero section */}
         <div className="relative isolate -z-10 overflow-hidden pt-4">
@@ -54,9 +57,10 @@ export default function AboutPage() {
                   also nice to have an actual end user in mind who isn&apos;t
                   afraid to give feedback and make requests. Source code
                   available on{" "}
-                  <Link href="https://github.com/squashd/irate">
-                    <span className="text-amber-400">GitHub</span>
-                  </Link>
+                  <StyledLink
+                    href="https://github.com/squashd/irate"
+                    text="GitHub"
+                  />
                   .
                 </p>
               </div>
@@ -108,20 +112,21 @@ export default function AboutPage() {
             <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:min-w-full lg:max-w-none lg:flex-none lg:gap-y-8">
               <div className="lg:col-end-1 lg:w-full lg:max-w-lg lg:pb-8">
                 <h2 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
-                  The man behind the app
+                  More about me
                 </h2>
                 <p className="mt-6 text-xl leading-8 text-zinc-400">
-                  I&apos;m just a junior developer who loves to learn new things
-                  and solve problems. I got started with web development in
-                  August 2022, and have been hooked ever since.
+                  I&apos;m a 27 year old junior developer who got started with
+                  web development in August 2022, and have been hooked ever
+                  since.
                 </p>
                 <p className="mt-6 text-base leading-7 text-zinc-400">
                   I&apos;m currently looking for work – either employment or
                   freelance. If you&apos;re interested in hiring me, please get
                   in touch. You can see more of my work on{" "}
-                  <Link href={"https://hjartland.dev"}>
-                    <span className="text-amber-400">my portfolio site</span>
-                  </Link>
+                  <StyledLink
+                    href="https://hjartland.dev"
+                    text="my portfolio"
+                  />
                   .
                 </p>
                 <p className="mt-6 text-sm italic leading-7 text-zinc-400">
