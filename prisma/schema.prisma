@@ -12,16 +12,16 @@ datasource db {
 }
 
 model Category {
-  id           Int      @id @default(autoincrement())
-  slug         String   @unique
-  name         String
-  description  String
-  totalRatings Int      @default(0)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  items        Item[]
-  image        Image    @relation(fields: [imageId], references: [id])
-  imageId      Int
+  id          Int      @id @default(autoincrement())
+  slug        String   @unique
+  name        String
+  createdBy   String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  items       Item[]
+  image       Image    @relation(fields: [imageId], references: [id])
+  imageId     Int
 
   @@index([slug], name: "slug")
 }
@@ -30,8 +30,9 @@ model Item {
   id               Int         @id @default(autoincrement())
   name             String
   description      String
-  href             String
-  informationField Json
+  href             String?
+  informationField Json?
+  createdBy        String
   createdAt        DateTime    @default(now())
   updatedAt        DateTime    @updatedAt
   category         Category    @relation(fields: [categoryId], references: [slug])
@@ -70,6 +71,7 @@ model Image {
   id        Int        @id @default(autoincrement())
   href      String
   alt       String     @default("")
+  addedBy   String
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
   items     Item?      @relation(fields: [itemId], references: [id])
