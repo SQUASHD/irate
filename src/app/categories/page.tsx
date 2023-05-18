@@ -2,7 +2,6 @@ import Link from "next/link";
 import { prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
 import AddItemButton from "@/app/categories/[category]/AddItem";
-import AuthGuard from "@/components/AuthGuard";
 
 export const revalidate = 3600; // revalidate every hour
 
@@ -32,9 +31,7 @@ export default async function CategoriesPage() {
       <h2 className="sr-only">Categories</h2>
 
       <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-        <AuthGuard>
-          <AddItemButton segmentSlug={""} />
-        </AuthGuard>
+        <AddItemButton segmentSlug={""} text={"Create new category"} />
         {categories.map((category) => (
           <Link
             key={category.id}

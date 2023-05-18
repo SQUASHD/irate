@@ -4,7 +4,6 @@ import { Metadata } from "next";
 import { toTitleCase } from "@/utils/formatString";
 import { auth } from "@clerk/nextjs";
 import ClientGrid from "@/components/ClientGrid";
-import AuthGuard from "@/components/AuthGuard";
 
 export const revalidate = 0; // revalidate every time
 export interface CategoryProps {
@@ -56,35 +55,11 @@ export default async function CategoryPage({
 
   const items = await getCategoryItems(category, userId);
 
-  if (items.length < 1 || !items) {
-    return (
-      <>
-        <div className="flex w-full flex-col items-center justify-center gap-8 py-24">
-          <div className="flex flex-col items-center gap-2">
-            <h1 className="text-5xl font-black tracking-tight">Sorry</h1>
-            <h2>No items found in that category</h2>
-          </div>
-          <p>
-            A feature to allow you to add items to this category is coming soon!
-          </p>
-        </div>
-        <h2 className="sr-only">Items</h2>
-        <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-          <AuthGuard>
-            <AddItemButton segmentSlug={`${category}`} />
-          </AuthGuard>
-        </div>
-      </>
-    );
-  }
-
   return (
     <>
       <h2 className="sr-only">Items</h2>
       <ClientGrid items={items} userId={userId}>
-        <AuthGuard>
-          <AddItemButton segmentSlug={`${category}`} />
-        </AuthGuard>
+        <AddItemButton segmentSlug={`${category}`} text={`Add new item`} />
       </ClientGrid>
     </>
   );

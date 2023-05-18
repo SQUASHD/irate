@@ -37,8 +37,8 @@ const GridCard = (props: GridCardProps) => {
   if (props.type === "empty")
     return (
       <div className="flex h-48 w-full items-center justify-center overflow-hidden rounded-lg bg-zinc-200">
-        <p className="text-lg font-semibold tracking-tight text-zinc-800">
-          No items matched
+        <p className="text-lg font-light tracking-tight text-zinc-800">
+          No items
         </p>
       </div>
     );
