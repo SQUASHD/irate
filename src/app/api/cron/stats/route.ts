@@ -6,10 +6,18 @@ import { getCategoryCount, getItemCount, getRatingCount } from "@/server/db";
 const redis = Redis.fromEnv();
 export async function GET() {
   try {
-    const userCount = await clerkClient.users.getCount();
-    const ratingCount = await getRatingCount();
-    const itemCount = await getItemCount();
-    const categoryCount = await getCategoryCount();
+    const userCountData = clerkClient.users.getCount();
+    const ratingCountData = getRatingCount();
+    const itemCountData = getItemCount();
+    const categoryCountData = getCategoryCount();
+
+    const [userCount, ratingCount, itemCount, categoryCount] =
+      await Promise.all([
+        userCountData,
+        ratingCountData,
+        itemCountData,
+        categoryCountData,
+      ]);
 
     const stats = [
       { id: 1, name: "Registered users", value: userCount },
