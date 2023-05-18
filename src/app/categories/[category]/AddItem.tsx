@@ -1,5 +1,3 @@
-import { auth } from "@clerk/nextjs/server";
-import { env } from "@/env.mjs";
 import { SVGProps } from "@/assets/icons";
 import React from "react";
 import Link from "next/link";
@@ -21,14 +19,7 @@ interface AddItemButtonProps {
   segmentSlug: string;
 }
 
-export default async function AddItemButton({
-  segmentSlug,
-}: AddItemButtonProps) {
-  const { userId } = auth();
-
-  if (userId !== env.CLERK_ADMIN_ID) {
-    return null;
-  }
+export default function AddItemButton({ segmentSlug }: AddItemButtonProps) {
   return (
     <Link href={`/categories/${segmentSlug}/add`} className="group">
       <div className="group flex h-48 w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-zinc-200">
