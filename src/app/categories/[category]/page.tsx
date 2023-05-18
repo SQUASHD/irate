@@ -5,7 +5,7 @@ import { toTitleCase } from "@/utils/stringUtils";
 import { auth } from "@clerk/nextjs";
 import ClientGrid from "@/components/ClientGrid";
 
-export const revalidate = 0; // revalidate every time
+export const revalidate = 3600; // revalidate every hour
 export interface CategoryProps {
   params: {
     category: string;

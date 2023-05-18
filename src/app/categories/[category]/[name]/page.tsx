@@ -11,7 +11,7 @@ import StarReviews from "@/components/StarReviews";
 import { FavButton } from "@/components/FavouriteButton";
 import { create, destroy } from "@/app/_actions/rating";
 
-export const revalidate = 0; // revalidate every time
+export const revalidate = 3600; // revalidate every hour
 
 interface Props {
   params: {
