@@ -6,11 +6,15 @@ import AddItemButton from "@/components/AddItem";
 export const revalidate = 3600; // revalidate every hour
 
 async function getCategories() {
-  return prisma.category.findMany({
-    include: {
-      image: true,
-    },
-  });
+  try {
+    return prisma.category.findMany({
+      include: {
+        image: true,
+      },
+    });
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 export const metadata = {

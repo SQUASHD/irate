@@ -14,32 +14,36 @@ export interface CategoryProps {
 }
 
 async function getCategoryItems(category: string, userId: string) {
-  return prisma.item.findMany({
-    where: {
-      category: {
-        slug: category,
-      },
-    },
-    include: {
-      images: true,
-      ratings: {
-        where: {
-          userId: userId,
-        },
-        select: {
-          rating: true,
+  try {
+    return prisma.item.findMany({
+      where: {
+        category: {
+          slug: category,
         },
       },
-      favourites: {
-        where: {
-          userId: userId,
+      include: {
+        images: true,
+        ratings: {
+          where: {
+            userId: userId,
+          },
+          select: {
+            rating: true,
+          },
         },
-        select: {
-          favourited: true,
+        favourites: {
+          where: {
+            userId: userId,
+          },
+          select: {
+            favourited: true,
+          },
         },
       },
-    },
-  });
+    });
+  } catch (e) {
+    console.error(e);
+  }
 }
 export async function generateMetadata({
   params: { category },
@@ -55,6 +59,7 @@ export default async function CategoryPage({
   if (!userId) return null;
 
   const items = await getCategoryItems(category, userId);
+  if (!items) throw new Error("No items found");
 
   return (
     <>

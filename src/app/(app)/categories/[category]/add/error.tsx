@@ -2,24 +2,17 @@
 
 import { useEffect } from "react";
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error;
-  reset: () => void;
-}) {
+export default function Error({ e, reset }: { e: Error; reset: () => void }) {
   useEffect(() => {
-    // Log the error to an error reporting service
-    console.error(error);
-  }, [error]);
+    console.error(e);
+  }, [e]);
 
   return (
     <div className="mx-auto h-full max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
       <div className="flex h-full flex-col items-center justify-center">
         <h2 className="text-center text-xl font-thin">Something went wrong</h2>
         <h3 className="text-center text-4xl font-black">Oops!</h3>
-        <p className="py-4">Error: {error.message}</p>
+        <p className="py-4">Error: {e.message}</p>
         <button
           onClick={
             // Attempt to recover by trying to re-render the segment

@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Custom404() {
   return (
     <>
-      <main className="grid min-h-screen place-items-center px-6 py-24 sm:py-32 lg:px-8">
+      <main className="grid h-full place-items-center px-6 py-24 sm:py-32 lg:px-8">
         <div className="text-center">
           <p className="mt-4 text-xl font-light tracking-tight text-zinc-100">
             Fant ikke siden

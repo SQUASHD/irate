@@ -31,8 +31,8 @@ export async function toggleFavorite(formData: FormData) {
           itemId: data.itemId,
         },
       });
-    } catch (error) {
-      console.error(error);
+    } catch (e) {
+      console.error(e);
     }
   else {
     try {
@@ -44,8 +44,8 @@ export async function toggleFavorite(formData: FormData) {
           favourited: !favourite.favourited,
         },
       });
-    } catch (error) {
-      console.error(error);
+    } catch (e) {
+      console.error(e);
     }
   }
 }

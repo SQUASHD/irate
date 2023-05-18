@@ -48,7 +48,8 @@ export async function create(formData: FormData) {
         },
       },
     });
-  } catch (error) {
+  } catch (e) {
+    console.error(e);
     throw new Error("Error creating category");
   }
   revalidatePath(`/categories/`);

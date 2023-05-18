@@ -21,9 +21,9 @@ export async function GET() {
     return new NextResponse(JSON.stringify(response), {
       status: 200,
     });
-  } catch (error) {
-    console.log(error);
-    return new NextResponse(JSON.stringify(error), {
+  } catch (e) {
+    console.error(e);
+    return new NextResponse(JSON.stringify(e), {
       status: 500,
     });
   }

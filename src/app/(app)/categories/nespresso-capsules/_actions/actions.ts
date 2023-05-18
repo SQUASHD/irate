@@ -29,7 +29,6 @@ export async function createNespressoItem(formData: FormData) {
 
   const newItem = createNespressoItemSchema.safeParse(data);
   if (!newItem.success) {
-    console.log(newItem.error.issues);
     throw new Error("Invalid data");
   }
 

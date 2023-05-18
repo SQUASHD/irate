@@ -48,7 +48,8 @@ export const create = async (formData: FormData) => {
     if (newItem) {
       redirect(`/categories/${data.categorySlug}/${encodeURI(newItem.name)}`);
     }
-  } catch (error) {
+  } catch (e) {
+    console.error(e);
     throw new Error("Error creating item");
   }
 };

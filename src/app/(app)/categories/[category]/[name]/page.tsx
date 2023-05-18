@@ -21,31 +21,35 @@ interface Props {
 }
 
 async function getItemData(name: string, category: string, userId: string) {
-  return prisma.item.findFirst({
-    where: {
-      name: name,
-      category: {
-        slug: category,
-      },
-    },
-    select: {
-      images: {
-        take: 1,
-      },
-      informationField: true,
-      name: true,
-      category: true,
-      description: true,
-      id: true,
-      ratings: true,
-      favourites: {
-        where: {
-          favourited: true,
-          userId: userId,
+  try {
+    return prisma.item.findFirst({
+      where: {
+        name: name,
+        category: {
+          slug: category,
         },
       },
-    },
-  });
+      select: {
+        images: {
+          take: 1,
+        },
+        informationField: true,
+        name: true,
+        category: true,
+        description: true,
+        id: true,
+        ratings: true,
+        favourites: {
+          where: {
+            favourited: true,
+            userId: userId,
+          },
+        },
+      },
+    });
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 export async function generateMetadata({

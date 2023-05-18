@@ -7,6 +7,14 @@ and I will make an attempt to adhere to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+## [0.10.2] - 2023-05-18
+
+### Added
+- Error logging to db queries
+
+### Fixed
+- Cancel button on form redirects to previous page
+
 ## [0.10.1] - 2023-05-18
 
 ### Added

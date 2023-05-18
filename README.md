@@ -30,7 +30,6 @@ Here's a snapshot of what's been done and what's next:
 - [ ] Image bucket/optimization
 - [ ] Rate limiting
 - [ ] Report functionality
-- [ ] Logging
 
 ### Done
 - [x] List capsules w/ product info
@@ -41,6 +40,7 @@ Here's a snapshot of what's been done and what's next:
 - [x] Filtering
 - [x] User Page
 - [x] Let users add categories and items
+- [x] Logging
 
 ## Change Log
 For details on what's new in each update, you can check out the [change log](CHANGELOG.md).

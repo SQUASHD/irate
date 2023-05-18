@@ -33,24 +33,32 @@ export const create = async (formData: FormData) => {
     },
   });
   if (rating) {
-    await prisma.rating.update({
-      where: {
-        id: rating.id,
-      },
-      data: {
-        rating: newRating.ratingScore,
-        comment: newRating.comment,
-      },
-    });
+    try {
+      await prisma.rating.update({
+        where: {
+          id: rating.id,
+        },
+        data: {
+          rating: newRating.ratingScore,
+          comment: newRating.comment,
+        },
+      });
+    } catch (e) {
+      console.error(e);
+    }
   } else {
-    await prisma.rating.create({
-      data: {
-        rating: newRating.ratingScore,
-        comment: newRating.comment,
-        userId: userId,
-        itemId: newRating.itemId,
-      },
-    });
+    try {
+      await prisma.rating.create({
+        data: {
+          rating: newRating.ratingScore,
+          comment: newRating.comment,
+          userId: userId,
+          itemId: newRating.itemId,
+        },
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }
   revalidatePath(`/categories/${newRating.itemId}`);
 };
@@ -59,10 +67,15 @@ export const destroy = async (formData: FormData) => {
   const ratingId = formData.get("ratingId");
   const categoryName = formData.get("categoryName");
   const itemName = formData.get("itemName");
-  await prisma.rating.delete({
-    where: {
-      id: parseInt(ratingId as string),
-    },
-  });
+
+  try {
+    await prisma.rating.delete({
+      where: {
+        id: parseInt(ratingId as string),
+      },
+    });
+  } catch (e) {
+    console.error(e);
+  }
   revalidatePath(`/categories/${categoryName}/${itemName}`);
 };
