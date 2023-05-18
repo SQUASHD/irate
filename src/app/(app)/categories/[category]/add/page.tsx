@@ -1,10 +1,36 @@
-import { create } from "@/app/_actions/category";
+import { notFound } from "next/navigation";
+import { create } from "@/app/(app)/_actions/item";
+import { prisma } from "@/lib/db";
 
-export default async function AddCategoryPage() {
+type AddItemParams = {
+  params: {
+    category: string;
+  };
+};
+
+const getCategoryName = async (slug: string) => {
+  return prisma.category.findFirst({
+    where: {
+      slug: slug,
+    },
+    select: {
+      name: true,
+      slug: true,
+    },
+  });
+};
+
+export default async function AddItemPage({ params }: AddItemParams) {
+  const category = await getCategoryName(params.category);
+  if (!category) notFound();
+
   return (
     <div className="flex min-h-full w-full flex-col items-center pb-16 pt-24">
       <div className="text-center leading-tight">
-        <h2 className="text-base">Create a new category!</h2>
+        <h2 className="text-base">Add a new item</h2>
+        <p className="text-sm font-light">
+          Still in alpha 🐞 please be patient!
+        </p>
       </div>
       <form action={create}>
         <div className="space-y-12">
@@ -15,7 +41,7 @@ export default async function AddCategoryPage() {
                   htmlFor="name"
                   className="block text-sm font-medium leading-6 text-white"
                 >
-                  Category name
+                  Item Name
                 </label>
                 <div className="mt-2">
                   <div className="flex rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-amber-500">
@@ -25,9 +51,31 @@ export default async function AddCategoryPage() {
                       id="name"
                       required={true}
                       minLength={5}
-                      maxLength={50}
                       className="ml-1 flex-1 border-0 bg-transparent py-1.5 pl-1 text-white focus:ring-0 sm:text-sm sm:leading-6"
-                      placeholder="New category name"
+                      placeholder="My favourite thing"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="sm:col-span-2">
+                <label
+                  htmlFor="categoryName"
+                  className="block text-sm font-medium leading-6 text-white"
+                >
+                  Category
+                </label>
+                <div className="mt-2">
+                  <div className="flex rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-amber-500">
+                    <input
+                      type="text"
+                      name="categoryName"
+                      id="categoryName"
+                      disabled={true}
+                      defaultValue={category.name}
+                      required={true}
+                      minLength={5}
+                      className="ml-1 flex-1 border-0 bg-transparent py-1.5 pl-1 text-white focus:ring-0 sm:text-sm sm:leading-6"
+                      placeholder="My favourite thing"
                     />
                   </div>
                 </div>
@@ -45,17 +93,15 @@ export default async function AddCategoryPage() {
                     id="description"
                     name="description"
                     rows={3}
-                    maxLength={500}
-                    minLength={10}
                     required={true}
                     className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-amber-500 sm:text-sm sm:leading-6"
-                    placeholder={"Some descriptive text about the category"}
+                    defaultValue={""}
                   />
                 </div>
               </div>
               <div className="col-span-full">
                 <label
-                  htmlFor="imageURL"
+                  htmlFor="imageHref"
                   className="block text-sm font-medium leading-6 text-white"
                 >
                   Image URL{" "}
@@ -66,8 +112,8 @@ export default async function AddCategoryPage() {
                 <div className="mt-2">
                   <input
                     type="url"
-                    name="imageURL"
-                    id="imageURL"
+                    name="imageHref"
+                    id="imageHref"
                     required={true}
                     className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-amber-500 sm:text-sm sm:leading-6"
                   />
@@ -91,6 +137,7 @@ export default async function AddCategoryPage() {
             Save
           </button>
         </div>
+        <input type="hidden" name="categorySlug" value={category.slug} />
       </form>
     </div>
   );

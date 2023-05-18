@@ -1,4 +1,4 @@
-import { createNespressoItem } from "@/app/categories/nespresso-capsules/_actions/actions";
+import { createNespressoItem } from "@/app/(app)/categories/nespresso-capsules/_actions/actions";
 
 export default async function AddNespressoPage() {
   return (

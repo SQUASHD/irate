@@ -1,4 +1,3 @@
-import Link from "next/link";
 import profile from "public/images/profil-blw.jpg";
 import youngDad from "public/images/young_dad.jpg";
 import Image from "next/image";

@@ -8,9 +8,8 @@ import UserGuard from "@/components/UserGuard";
 import { addUserData } from "@/utils/addUserData";
 import { Metadata } from "next";
 import StarReviews from "@/components/StarReviews";
-import { FavButton } from "@/components/FavouriteButton";
-import { create, destroy } from "@/app/_actions/rating";
-import { informationFieldSchema } from "@/app/categories/nespresso-capsules/_model/model";
+import { create, destroy } from "@/app/(app)/_actions/rating";
+import { informationFieldSchema } from "@/app/(app)/categories/nespresso-capsules/_model/model";
 import { cn } from "@/lib/utils";
 import { ImageCard } from "@/components/ItemPage";
 

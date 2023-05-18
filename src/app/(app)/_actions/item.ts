@@ -1,6 +1,6 @@
 "use server";
 
-import { createItemSchema } from "@/app/_models/item";
+import { createItemSchema } from "@/app/(app)/_models/item";
 import { prisma } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";

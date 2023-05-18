@@ -8,7 +8,7 @@ import { addUserData } from "@/utils/addUserData";
 import { Metadata } from "next";
 import { toTitleCase } from "@/utils/stringUtils";
 import StarReviews from "@/components/StarReviews";
-import { create, destroy } from "@/app/_actions/rating";
+import { create, destroy } from "@/app/(app)/_actions/rating";
 import { ImageCard } from "@/components/ItemPage";
 
 export const revalidate = 3600; // revalidate every hour

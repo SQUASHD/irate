@@ -2,7 +2,7 @@
 import { prisma } from "@/lib/db";
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
-import { createNespressoItemSchema } from "@/app/categories/nespresso-capsules/_model/model";
+import { createNespressoItemSchema } from "@/app/(app)/categories/nespresso-capsules/_model/model";
 
 export async function createNespressoItem(formData: FormData) {
   const { userId } = auth();
