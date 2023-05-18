@@ -1,9 +1,10 @@
 import { prisma } from "@/lib/db";
-import AddItemButton from "@/app/categories/[category]/AddItem";
+import AddItemButton from "@/components/AddItem";
 import { Metadata } from "next";
 import { toTitleCase } from "@/utils/stringUtils";
 import { auth } from "@clerk/nextjs";
 import ClientGrid from "@/components/ClientGrid";
+import FilterBar from "@/components/FilterBar";
 
 export const revalidate = 3600; // revalidate every hour
 export interface CategoryProps {
@@ -57,6 +58,7 @@ export default async function CategoryPage({
 
   return (
     <>
+      <FilterBar />
       <h2 className="sr-only">Items</h2>
       <ClientGrid items={items} userId={userId}>
         <AddItemButton segmentSlug={`${category}`} text={`Add new item`} />
