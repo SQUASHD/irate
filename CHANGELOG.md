@@ -7,6 +7,23 @@ and I will make an attempt to adhere to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+
+## [0.10.0] - 2023-05-18
+
+### Added
+- Error handling
+- Functionality to add items
+- Pages to add new items
+
+### Changed
+- Auth handled by auth component and not add item button
+  - separation of concerns
+- Not found for '\[category]/add' route is more specific
+- UserId is now added to items and categories
+
+### Removed
+- Cheesy line in add nespresso capsule page
+
 ## [0.9.1] - 2023-05-17
 
 ### Added
