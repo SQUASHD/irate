@@ -6,7 +6,7 @@ import { auth } from "@clerk/nextjs";
 import UserGuard from "@/components/UserGuard";
 import { addUserData } from "@/utils/addUserData";
 import { Metadata } from "next";
-import { toTitleCase } from "@/utils/formatString";
+import { toTitleCase } from "@/utils/stringUtils";
 import StarReviews from "@/components/StarReviews";
 import { FavButton } from "@/components/FavouriteButton";
 import { create, destroy } from "@/app/_actions/rating";

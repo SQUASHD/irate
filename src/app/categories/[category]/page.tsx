@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/db";
 import AddItemButton from "@/app/categories/[category]/AddItem";
 import { Metadata } from "next";
-import { toTitleCase } from "@/utils/formatString";
+import { toTitleCase } from "@/utils/stringUtils";
 import { auth } from "@clerk/nextjs";
 import ClientGrid from "@/components/ClientGrid";
 
