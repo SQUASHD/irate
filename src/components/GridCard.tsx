@@ -15,7 +15,7 @@ type GridCardProps =
 const GridCard = (props: GridCardProps) => {
   if (props.type === "item") {
     return (
-      <div className="group">
+      <div className="group relative">
         {props.children}
         <Link
           href={`/categories/${props.category}/${encodeURI(props.name)}`}

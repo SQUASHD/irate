@@ -22,13 +22,14 @@ export const FavButton = (props: FavButtonProps) => {
         setAnimate(true);
         void toggleFavorite(formData);
       }}
+      className="absolute left-1 top-1 z-20"
     >
       <input type="hidden" name="userId" value={props.userId} />
       <input type="hidden" name="itemId" value={props.itemId} />
       <button
         type="submit"
         className={cn(
-          "group/button absolute z-20 flex h-8 w-8 items-center justify-center",
+          "group/button flex h-8 w-8 items-center justify-center",
           props.className
         )}
         onClick={() => setAnimate(false)}
