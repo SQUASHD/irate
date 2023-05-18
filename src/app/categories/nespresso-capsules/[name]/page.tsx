@@ -6,18 +6,14 @@ import AuthGuardedToggle from "@/components/AuthGuardedToggle";
 import { auth } from "@clerk/nextjs";
 import UserGuard from "@/components/UserGuard";
 import { addUserData } from "@/utils/addUserData";
-import IntensityField from "@/app/categories/nespresso-capsules/[name]/IntensityField";
 import { Metadata } from "next";
 import StarReviews from "@/components/StarReviews";
 import { FavButton } from "@/components/FavouriteButton";
 import { create, destroy } from "@/app/_actions/rating";
 import { informationFieldSchema } from "@/app/categories/nespresso-capsules/_model/model";
+import { cn } from "@/lib/utils";
 
 export const revalidate = 3600; // revalidate every hour
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
 
 interface Props {
   params: {
@@ -32,6 +28,36 @@ type coffeeInfo = {
   body: number;
   roast: number;
 };
+
+function ColouredIntensity({ intensity }: { intensity: number }) {
+  return (
+    <div className="flex gap-1">
+      {[...Array(intensity)].map((_, i) => (
+        <div key={i} className="h-4 w-1 bg-zinc-200"></div>
+      ))}
+    </div>
+  );
+}
+
+function UncolouredIntensity({ intensity }: { intensity: number }) {
+  return (
+    <div className="flex gap-1">
+      {[...Array(12 - intensity)].map((_, i) => (
+        <div key={i} className="h-4 w-1 bg-zinc-600"></div>
+      ))}
+    </div>
+  );
+}
+
+function IntensityField({ intensity }: { intensity: number }) {
+  return (
+    <div className="flex items-center gap-1">
+      <ColouredIntensity intensity={intensity} />
+      {intensity}
+      <UncolouredIntensity intensity={intensity} />
+    </div>
+  );
+}
 
 async function getNespressoCapsule(name: string, userId: string) {
   return prisma.item.findFirst({
@@ -183,7 +209,7 @@ export default async function ItemPage({ params: { category, name } }: Props) {
                     {[0, 1, 2, 3, 4].map((rating) => (
                       <div
                         key={rating}
-                        className={classNames(
+                        className={cn(
                           validatedInformationField.flavourProfile[
                             flavour as keyof coffeeInfo
                           ] > rating
