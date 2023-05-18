@@ -1,81 +1,6 @@
-import { auth } from "@clerk/nextjs/server";
-import { env } from "@/env.mjs";
-import { prisma } from "@/lib/db";
-import { notFound, redirect } from "next/navigation";
-import { informationFieldSchema } from "@/app/categories/nespresso-capsules/Types";
+import { createNespressoItem } from "@/app/categories/nespresso-capsules/_actions/actions";
 
-export default async function AddItemPage() {
-  const { userId } = auth();
-  if (userId !== env.CLERK_ADMIN_ID) {
-    notFound();
-  }
-
-  async function addItem(formData: FormData) {
-    "use server";
-    const capsuleName = formData.get("capsuleName") as string;
-    const description = formData.get("description") as string;
-    const purchaseHref = formData.get("purchaseHref") as string;
-    const imageHref = formData.get("imageHref") as string;
-    const cupSize = formData.get("cupSize") as string;
-    const tagLine = formData.get("tagLine");
-    const aromaticNotes = formData.get("aromaticNotes") as string;
-    const intensity = formData.get("intensity") as string;
-    const bitterness = formData.get("bitterness") as string;
-    const acidity = formData.get("acidity") as string;
-    const roast = formData.get("roast") as string;
-    const body = formData.get("body") as string;
-
-    const data = informationFieldSchema.parse({
-      cupSize: cupSize,
-      tagLine: tagLine,
-      notes: aromaticNotes,
-      intensity: parseInt(intensity),
-      capsuleType: "Vertuo",
-      flavourProfile: {
-        bitterness: parseInt(bitterness),
-        acidity: parseInt(acidity),
-        roast: parseInt(roast),
-        body: parseInt(body),
-      },
-    });
-
-    try {
-      await prisma.item.create({
-        data: {
-          name: capsuleName,
-          description: description,
-          href: purchaseHref,
-          categoryId: "nespresso-capsules",
-          createdBy: userId ?? "unknown",
-          images: {
-            create: {
-              href: imageHref,
-              alt: capsuleName,
-              addedBy: userId ?? "unknown",
-            },
-          },
-          informationField: {
-            capsuleType: "Vertuo",
-            tagLine: data.tagLine,
-            cupSize: data.cupSize,
-            intensity: data.intensity,
-            notes: aromaticNotes,
-            flavourProfile: {
-              bitterness: data.flavourProfile.bitterness,
-              acidity: data.flavourProfile.acidity,
-              roast: data.flavourProfile.roast,
-              body: data.flavourProfile.body,
-            },
-          },
-        },
-      });
-    } catch (error) {
-      console.error(error);
-    }
-    const href = `/category/nespresso-capsules/${encodeURI(capsuleName)}`;
-    redirect(href);
-  }
-
+export default async function AddNespressoPage() {
   return (
     <div className="flex min-h-full w-full flex-col items-center pb-16 pt-24">
       <div className="text-center leading-tight">
@@ -83,7 +8,7 @@ export default async function AddItemPage() {
           Currently only supports vertuo capsule types
         </h2>
       </div>
-      <form action={addItem}>
+      <form action={createNespressoItem}>
         <div className="space-y-12">
           <div className="border-b border-white/10 pb-12">
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -124,23 +49,6 @@ export default async function AddItemPage() {
                     required={true}
                     className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-amber-500 sm:text-sm sm:leading-6"
                     defaultValue={""}
-                  />
-                </div>
-              </div>
-              <div className="col-span-full">
-                <label
-                  htmlFor="purchaseHref"
-                  className="block text-sm font-medium leading-6 text-white"
-                >
-                  URL <span className="text-zinc-400">– where to buy</span>
-                </label>
-                <div className="mt-2">
-                  <input
-                    type="url"
-                    name="purchaseHref"
-                    id="purchaseHref"
-                    required={true}
-                    className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-amber-500 sm:text-sm sm:leading-6"
                   />
                 </div>
               </div>
