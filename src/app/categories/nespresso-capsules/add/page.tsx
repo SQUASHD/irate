@@ -82,7 +82,6 @@ export default async function AddItemPage() {
         <h2 className="text-base">
           Currently only supports vertuo capsule types
         </h2>
-        <p className="text-xs font-light">I hope that&apos;s okay, dad ❤️</p>
       </div>
       <form action={addItem}>
         <div className="space-y-12">
