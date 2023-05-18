@@ -1,8 +1,6 @@
-import checkIfAdmin from "@/server/checkIfAdmin";
 import { create } from "@/app/_actions/category";
 
 export default async function AddCategoryPage() {
-  await checkIfAdmin();
   return (
     <div className="flex min-h-full w-full flex-col items-center pb-16 pt-24">
       <div className="text-center leading-tight">
@@ -52,29 +50,6 @@ export default async function AddCategoryPage() {
                     required={true}
                     className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-amber-500 sm:text-sm sm:leading-6"
                     placeholder={"Some descriptive text about the category"}
-                  />
-                </div>
-              </div>
-              <div className="col-span-full">
-                <label
-                  htmlFor="slug"
-                  className="block text-sm font-medium leading-6 text-white"
-                >
-                  Slug{" "}
-                  <span className="text-zinc-400">
-                    – the URL to find items in the category
-                  </span>
-                </label>
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    name="slug"
-                    id="slug"
-                    required={true}
-                    minLength={5}
-                    maxLength={25}
-                    className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-amber-500 sm:text-sm sm:leading-6"
-                    placeholder="new-category"
                   />
                 </div>
               </div>
