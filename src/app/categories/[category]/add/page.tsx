@@ -1,5 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { create } from "@/app/_actions/item";
 import { prisma } from "@/lib/db";
 
@@ -10,21 +9,18 @@ type AddItemParams = {
 };
 
 const getCategoryName = async (slug: string) => {
-  const categoryInfo = await prisma.category.findFirst({
+  return prisma.category.findFirst({
     where: {
       slug: slug,
     },
     select: {
       name: true,
+      slug: true,
     },
   });
-  return categoryInfo;
 };
 
 export default async function AddItemPage({ params }: AddItemParams) {
-  const { userId } = auth();
-  if (!userId) return redirect("/sign-in");
-
   const category = await getCategoryName(params.category);
   if (!category) notFound();
 
@@ -42,7 +38,7 @@ export default async function AddItemPage({ params }: AddItemParams) {
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="sm:col-span-2">
                 <label
-                  htmlFor="capsuleName"
+                  htmlFor="name"
                   className="block text-sm font-medium leading-6 text-white"
                 >
                   Item Name
@@ -51,8 +47,8 @@ export default async function AddItemPage({ params }: AddItemParams) {
                   <div className="flex rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-amber-500">
                     <input
                       type="text"
-                      name="capsuleName"
-                      id="capsuleName"
+                      name="name"
+                      id="name"
                       required={true}
                       minLength={5}
                       className="ml-1 flex-1 border-0 bg-transparent py-1.5 pl-1 text-white focus:ring-0 sm:text-sm sm:leading-6"
@@ -61,24 +57,26 @@ export default async function AddItemPage({ params }: AddItemParams) {
                   </div>
                 </div>
               </div>
-
               <div className="sm:col-span-2">
-                <div className="">
-                  Category Name <span>- can&apos;t be changed</span>
-                </div>
-                <div className="flex rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-amber-500">
-                  <div className="ml-1 flex-1 border-0 bg-transparent py-1.5 pl-1 text-white focus:ring-0 sm:text-sm sm:leading-6">
-                    {category.name}
-                  </div>
-                </div>
-              </div>
-              <div className="sm:col-span-2">
-                <div className="">
-                  Category Slug <span>- can&apos;t be changed</span>
-                </div>
-                <div className="flex rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-amber-500">
-                  <div className="ml-1 flex-1 border-0 bg-transparent py-1.5 pl-1 text-white focus:ring-0 sm:text-sm sm:leading-6">
-                    {params.category}
+                <label
+                  htmlFor="categoryName"
+                  className="block text-sm font-medium leading-6 text-white"
+                >
+                  Category
+                </label>
+                <div className="mt-2">
+                  <div className="flex rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-amber-500">
+                    <input
+                      type="text"
+                      name="categoryName"
+                      id="categoryName"
+                      disabled={true}
+                      defaultValue={category.name}
+                      required={true}
+                      minLength={5}
+                      className="ml-1 flex-1 border-0 bg-transparent py-1.5 pl-1 text-white focus:ring-0 sm:text-sm sm:leading-6"
+                      placeholder="My favourite thing"
+                    />
                   </div>
                 </div>
               </div>
@@ -119,12 +117,6 @@ export default async function AddItemPage({ params }: AddItemParams) {
                     required={true}
                     className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-amber-500 sm:text-sm sm:leading-6"
                   />
-                  <input
-                    type="hidden"
-                    name="userId"
-                    id="userId"
-                    value={userId}
-                  />
                 </div>
               </div>
             </div>
@@ -145,6 +137,7 @@ export default async function AddItemPage({ params }: AddItemParams) {
             Save
           </button>
         </div>
+        <input type="hidden" name="categorySlug" value={category.slug} />
       </form>
     </div>
   );
