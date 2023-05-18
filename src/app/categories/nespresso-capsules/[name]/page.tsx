@@ -12,6 +12,7 @@ import { FavButton } from "@/components/FavouriteButton";
 import { create, destroy } from "@/app/_actions/rating";
 import { informationFieldSchema } from "@/app/categories/nespresso-capsules/_model/model";
 import { cn } from "@/lib/utils";
+import { ImageCard } from "@/components/ItemPage";
 
 export const revalidate = 3600; // revalidate every hour
 
@@ -173,19 +174,14 @@ export default async function ItemPage({ params: { category, name } }: Props) {
                   {/* @ts-expect-error */}
                   <NewImageUrl imageId={image.id} />
                 </AuthGuardedToggle>
-                <div>
-                  <FavButton
-                    itemId={item.id}
-                    userId={userId}
-                    favourited={item?.favourites[0]?.favourited ?? false}
-                  />
-                  <img
-                    key={image.id}
-                    src={image.href}
-                    alt={image.alt}
-                    className="h-full w-full object-cover object-center"
-                  />
-                </div>
+                <ImageCard
+                  itemId={item.id}
+                  userId={userId}
+                  favourited={item?.favourites[0]?.favourited ?? false}
+                  imageId={image.id}
+                  alt={image.alt}
+                  href={image.href}
+                />
               </>
             ))}
           </div>
