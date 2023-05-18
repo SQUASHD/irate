@@ -11,7 +11,7 @@ import IntensityField from "@/app/categories/nespresso-capsules/[name]/Intensity
 import { Metadata } from "next";
 import StarReviews from "@/components/StarReviews";
 import { FavButton } from "@/components/FavouriteButton";
-import { addRating, deleteRating } from "@/app/_actions/rating";
+import { create, destroy } from "@/app/_actions/rating";
 
 export const revalidate = 3600; // revalidate every hour
 
@@ -210,7 +210,7 @@ export default async function ItemPage({ params: { category, name } }: Props) {
               You haven&apos;t reviewed this yet
             </h3>
             <form
-              action={addRating}
+              action={create}
               method="POST"
               className="grid w-full max-w-xl content-center gap-4 bg-transparent"
             >
@@ -273,7 +273,7 @@ export default async function ItemPage({ params: { category, name } }: Props) {
 
                 <div className="mt-6 flex items-center gap-2 text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 xl:col-span-3">
                   <UserGuard id={rating.userSecretId}>
-                    <form action={deleteRating}>
+                    <form action={destroy}>
                       <button
                         type="submit"
                         className="flex items-center justify-center rounded-lg bg-rose-500 p-2 hover:bg-rose-600"

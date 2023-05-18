@@ -9,7 +9,7 @@ import { Metadata } from "next";
 import { toTitleCase } from "@/utils/formatString";
 import StarReviews from "@/components/StarReviews";
 import { FavButton } from "@/components/FavouriteButton";
-import { addRating, deleteRating } from "@/app/_actions/rating";
+import { create, destroy } from "@/app/_actions/rating";
 
 export const revalidate = 0; // revalidate every time
 
@@ -169,7 +169,7 @@ export default async function ItemPage({ params: { category, name } }: Props) {
               You haven&apos;t reviewed this yet
             </h3>
             <form
-              action={addRating}
+              action={create}
               method="POST"
               className="grid w-full max-w-xl content-center gap-4 bg-transparent"
             >
@@ -232,7 +232,7 @@ export default async function ItemPage({ params: { category, name } }: Props) {
 
                 <div className="mt-6 flex items-center text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex-col lg:items-start xl:col-span-3">
                   <UserGuard id={rating.userSecretId}>
-                    <form action={deleteRating}>
+                    <form action={destroy}>
                       <button type="submit">Delete</button>
                       <input type="hidden" name="ratingId" value={rating.id} />
                       <input

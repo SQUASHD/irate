@@ -5,7 +5,7 @@ import { z } from "zod";
 import { prisma } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 
-export const addRating = async (formData: FormData) => {
+export const create = async (formData: FormData) => {
   const { userId } = auth();
 
   if (!userId) throw new Error("Not logged in");
@@ -55,7 +55,7 @@ export const addRating = async (formData: FormData) => {
   revalidatePath(`/categories/${newRating.itemId}`);
 };
 
-export const deleteRating = async (formData: FormData) => {
+export const destroy = async (formData: FormData) => {
   const ratingId = formData.get("ratingId");
   const categoryName = formData.get("categoryName");
   const itemName = formData.get("itemName");

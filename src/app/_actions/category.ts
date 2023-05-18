@@ -1,9 +1,14 @@
 "use server";
 import { prisma } from "@/lib/db";
 import { z } from "zod";
+import { auth } from "@clerk/nextjs/server";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export async function createCategory(formData: FormData) {
+export async function create(formData: FormData) {
+  const { userId } = auth();
+  if (!userId) throw new Error("User not logged in");
+
   const createCategorySchema = z.object({
     slug: z
       .string()
@@ -22,18 +27,20 @@ export async function createCategory(formData: FormData) {
     imageURL: formData.get("imageURL"),
   };
 
-  const newCategory = createCategorySchema.safeParse(data);
-  if (!newCategory.success) throw new Error("Invalid data");
+  const category = createCategorySchema.safeParse(data);
+  if (!category.success) throw new Error("Invalid data");
 
   try {
     await prisma.category.create({
       data: {
-        slug: newCategory.data.slug,
-        name: newCategory.data.name,
-        description: newCategory.data.description,
+        slug: category.data.slug,
+        name: category.data.name,
+        description: category.data.description,
+        createdBy: userId,
         image: {
           create: {
-            href: newCategory.data.imageURL,
+            href: category.data.imageURL,
+            addedBy: userId,
           },
         },
       },
@@ -41,5 +48,6 @@ export async function createCategory(formData: FormData) {
   } catch (error) {
     throw new Error("Error creating category");
   }
+  revalidatePath(`/categories/`);
   redirect(`/categories/`);
 }

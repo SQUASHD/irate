@@ -1,7 +1,7 @@
 "use client";
 import { HeartFillIcon, HeartLineIcon } from "@/assets/icons";
 import { cn } from "@/lib/utils";
-import { toggleFavorite } from "@/server/_actions/favourite";
+import { toggleFavorite } from "@/app/_actions/favourite";
 import { useState } from "react";
 
 type FavButtonProps = {

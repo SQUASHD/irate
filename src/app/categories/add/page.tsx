@@ -1,5 +1,5 @@
 import checkIfAdmin from "@/server/checkIfAdmin";
-import { createCategory } from "@/app/_actions/category";
+import { create } from "@/app/_actions/category";
 
 export default async function AddCategoryPage() {
   await checkIfAdmin();
@@ -8,7 +8,7 @@ export default async function AddCategoryPage() {
       <div className="text-center leading-tight">
         <h2 className="text-base">Create a new category!</h2>
       </div>
-      <form action={createCategory}>
+      <form action={create}>
         <div className="space-y-12">
           <div className="border-b border-white/10 pb-12">
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
