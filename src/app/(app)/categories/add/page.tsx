@@ -1,4 +1,5 @@
 import { create } from "@/app/(app)/_actions/category";
+import { CancelButton } from "@/components/ui/ClientSideButtons";
 
 export default async function AddCategoryPage() {
   return (
@@ -78,12 +79,7 @@ export default async function AddCategoryPage() {
         </div>
 
         <div className="mt-6 flex items-center justify-end gap-x-6">
-          <button
-            type="button"
-            className="text-sm font-semibold leading-6 text-white"
-          >
-            Cancel
-          </button>
+          <CancelButton />
           <button
             type="submit"
             className="rounded-md bg-amber-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-amber-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500"
