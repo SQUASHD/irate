@@ -5,5 +5,4 @@ export const createItemSchema = z.object({
   description: z.string().min(1).max(255),
   imageHref: z.string().url(),
   categorySlug: z.string().min(1).max(40),
-  userId: z.string().trim(),
 });
