@@ -2,7 +2,6 @@
 
 import { createItemSchema } from "@/app/_models/item";
 import { prisma } from "@/lib/db";
-import { revalidatePath } from "next/cache";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
@@ -47,10 +46,7 @@ export const create = async (formData: FormData) => {
       },
     });
     if (newItem) {
-      revalidatePath(
-        `/categories/${data.categorySlug}/${encodeURI(item.data.name)}`
-      );
-      redirect(`/categories/${data.categorySlug}/${encodeURI(item.data.name)}`);
+      redirect(`/categories/${data.categorySlug}/${encodeURI(newItem.name)}`);
     }
   } catch (error) {
     throw new Error("Error creating item");
