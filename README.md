@@ -4,38 +4,43 @@ iRate is a web application I've designed to help coffee lovers track and rate th
 ## Features
 
 ### Current
-- **Capsule Catalog**: Users can browse through a near comprehensive list of Nespresso capsules with detailed product information.
-- **Rating System**: Users can add ratings for their favorite (or least favorite) capsules.
+- **Rating System**: Users can add ratings for their favorite (or least favorite) items.
 - **Filtering**: Users can filter capsules by whether they have rated them or not.
 - **Data Persistence**: Ratings are stored for future reference.
 - **Basic Authentication**: I've implemented a simple authentication system to help secure user data.
+- **Favourites**: Users can mark their favourite items.
+- **Categories**: Users can add new categories and items to the database.
+- **User Page**: A personal space where users can view (and soon manage) their ratings and favourites
+  - And more!
 
 ### In Development
-- **User Page**: A personal space where users can view and manage their ratings.
 - **Rating Preview**: I'm working on allowing users to see capsule ratings directly on item cards for quick comparisons.
+- **Dashboard**: Let users more easily manage their ratings, favourites and items/categories they've added.
 
 ### Future Plans
 - **Teams/Groups**: In the future, I'm considering adding functionality for users to create groups to share and compare their ratings.
-- **Favourites**: A feature to let users mark their favourite items.
-- **More Categories**: More categories with appropriate generic formatting
 
 ## Development Progress
 
 Here's a snapshot of what's been done and what's next:
 
 ### To-Do
-- [ ] Let users add categories and items
 - [ ] Add teams/groups
+- [ ] Let users modify ratings and items they created
+- [ ] Image bucket/optimization
+- [ ] Rate limiting
+- [ ] Report functionality
+- [ ] Logging
 
 ### Done
 - [x] List capsules w/ product info
 - [x] Data persistence
-- [x] Basic auth
-- [x] Functionality to add other items – currently limited to admin
-- [x] Rating functionality
+- [x] Auth
+- [x] Rating
 - [x] Favorites
 - [x] Filtering
 - [x] User Page
+- [x] Let users add categories and items
 
 ## Change Log
 For details on what's new in each update, you can check out the [change log](CHANGELOG.md).

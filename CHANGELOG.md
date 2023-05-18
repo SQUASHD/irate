@@ -7,6 +7,13 @@ and I will make an attempt to adhere to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+## [0.10.1] - 2023-05-18
+
+### Added
+- Added business logic to adding item
+
+### Removed
+- Auth checks for adding new items
 
 ## [0.10.0] - 2023-05-18
 
