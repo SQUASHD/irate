@@ -89,7 +89,7 @@ export default function FilterBar() {
                           name={`${filter.label}[]`}
                           value={option.value}
                           type="radio"
-                          className="h-4 w-4 flex-shrink-0 rounded border-gray-300 focus:ring-amber-500"
+                          className="h-4 w-4 flex-shrink-0 rounded border-gray-300 text-amber-400 focus:ring-amber-500"
                           checked={
                             option.value === searchParams.get(filter.value)
                           }
