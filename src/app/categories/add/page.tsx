@@ -1,5 +1,5 @@
 import checkIfAdmin from "@/server/checkIfAdmin";
-import { createCategory } from "@/server/_actions/category";
+import { createCategory } from "@/app/_actions/category";
 
 export default async function AddCategoryPage() {
   await checkIfAdmin();

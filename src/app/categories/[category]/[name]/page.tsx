@@ -9,9 +9,9 @@ import { Metadata } from "next";
 import { toTitleCase } from "@/utils/formatString";
 import StarReviews from "@/components/StarReviews";
 import { FavButton } from "@/components/FavouriteButton";
-import { addRating, deleteRating } from "@/server/_actions/rating";
+import { addRating, deleteRating } from "@/app/_actions/rating";
 
-export const revalidate = 3600; // revalidate every hour
+export const revalidate = 0; // revalidate every time
 
 interface Props {
   params: {

@@ -2,10 +2,13 @@ import { auth } from "@clerk/nextjs/server";
 import { env } from "@/env.mjs";
 import { prisma } from "@/lib/db";
 import { notFound, redirect } from "next/navigation";
-import { informationFieldSchema } from "@/app/(app)/categories/nespresso-capsules/Types";
+import { informationFieldSchema } from "@/app/categories/nespresso-capsules/Types";
 
 export default async function AddItemPage() {
   const { userId } = auth();
+  if (userId !== env.CLERK_ADMIN_ID) {
+    notFound();
+  }
 
   async function addItem(formData: FormData) {
     "use server";
@@ -43,10 +46,12 @@ export default async function AddItemPage() {
           description: description,
           href: purchaseHref,
           categoryId: "nespresso-capsules",
+          createdBy: userId ?? "unknown",
           images: {
             create: {
               href: imageHref,
               alt: capsuleName,
+              addedBy: userId ?? "unknown",
             },
           },
           informationField: {
@@ -70,9 +75,7 @@ export default async function AddItemPage() {
     const href = `/category/nespresso-capsules/${encodeURI(capsuleName)}`;
     redirect(href);
   }
-  if (userId !== env.CLERK_ADMIN_ID) {
-    notFound();
-  }
+
   return (
     <div className="flex min-h-full w-full flex-col items-center pb-16 pt-24">
       <div className="text-center leading-tight">

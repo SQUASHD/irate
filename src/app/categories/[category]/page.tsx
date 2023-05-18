@@ -1,11 +1,12 @@
 import { prisma } from "@/lib/db";
-import AddItemButton from "@/app/(app)/categories/[category]/AddItem";
+import AddItemButton from "@/app/categories/[category]/AddItem";
 import { Metadata } from "next";
 import { toTitleCase } from "@/utils/formatString";
 import { auth } from "@clerk/nextjs";
 import ClientGrid from "@/components/ClientGrid";
+import AuthGuard from "@/components/AuthGuard";
 
-export const revalidate = 3600; // revalidate every hour
+export const revalidate = 0; // revalidate every time
 export interface CategoryProps {
   params: {
     category: string;
@@ -54,7 +55,7 @@ export default async function CategoryPage({
   if (!userId) return null;
 
   const items = await getCategoryItems(category, userId);
-  console.log(items);
+
   if (items.length < 1 || !items) {
     return (
       <>
@@ -69,8 +70,9 @@ export default async function CategoryPage({
         </div>
         <h2 className="sr-only">Items</h2>
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-          {/* @ts-expect-error */}
-          <AddItemButton segmentSlug={`${category}`} />
+          <AuthGuard>
+            <AddItemButton segmentSlug={`${category}`} />
+          </AuthGuard>
         </div>
       </>
     );
@@ -80,8 +82,9 @@ export default async function CategoryPage({
     <>
       <h2 className="sr-only">Items</h2>
       <ClientGrid items={items} userId={userId}>
-        {/* @ts-expect-error */}
-        <AddItemButton segmentSlug={`${category}`} />
+        <AuthGuard>
+          <AddItemButton segmentSlug={`${category}`} />
+        </AuthGuard>
       </ClientGrid>
     </>
   );
