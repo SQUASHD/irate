@@ -22,8 +22,7 @@ const features = [
   },
   {
     name: "Filter & Search.",
-    description:
-      "Find the ratings and reviews you're looking for in a matter of seconds.",
+    description: "Filter through enormous amounts of data with ease.",
     icon: MagnifyingGlassIcon,
   },
   {
@@ -41,7 +40,7 @@ const features = [
   {
     name: "Only love.",
     description:
-      "Any form of hate speech, harassment, or bullying is strictly prohibited. Only commercial products are allowed to be rated and reviewed.",
+      "Any form of hate speech, harassment, or bullying is strictly prohibited.",
     icon: HeartIcon,
   },
 ];

@@ -2,6 +2,7 @@ import Hero from "@/components/LandingPage/Hero";
 import Stats from "@/components/LandingPage/Stats";
 import Testimonial from "@/components/LandingPage/Testimonial";
 import Features from "@/components/LandingPage/Features";
+import InDevelopment from "@/components/LandingPage/InDevelopment";
 
 export const metadata = {
   title: "iRate",
@@ -11,6 +12,7 @@ export const metadata = {
 export default async function Home() {
   return (
     <>
+      <InDevelopment />
       <Hero />
       {/* @ts-expect-error */}
       <Stats />
