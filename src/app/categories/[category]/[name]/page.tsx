@@ -8,8 +8,8 @@ import { addUserData } from "@/utils/addUserData";
 import { Metadata } from "next";
 import { toTitleCase } from "@/utils/stringUtils";
 import StarReviews from "@/components/StarReviews";
-import { FavButton } from "@/components/FavouriteButton";
 import { create, destroy } from "@/app/_actions/rating";
+import { ImageCard } from "@/components/ItemPage";
 
 export const revalidate = 3600; // revalidate every hour
 
@@ -78,7 +78,7 @@ export default async function ItemPage({ params: { category, name } }: Props) {
 
   return (
     <>
-      <div className="mx-auto max-w-2xl px-4 pt-16 sm:px-6 sm:pt-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+      <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
         {/* Product details */}
         <div className="lg:max-w-lg lg:self-end">
           <div className="mt-4">
@@ -132,18 +132,14 @@ export default async function ItemPage({ params: { category, name } }: Props) {
                   {/* @ts-expect-error */}
                   <NewImageUrl imageId={image.id} />
                 </AuthGuardedToggle>
-                <img
-                  key={image.id}
-                  src={image.href}
+                <ImageCard
+                  itemId={item.id}
+                  userId={userId}
+                  favourited={item?.favourites[0]?.favourited ?? false}
+                  imageId={image.id}
                   alt={image.alt}
-                  className="h-full w-full object-cover object-center"
-                >
-                  <FavButton
-                    itemId={item.id}
-                    userId={userId}
-                    favourited={item?.favourites[0]?.favourited ?? false}
-                  />
-                </img>
+                  href={image.href}
+                />
               </>
             ))}
           </div>
