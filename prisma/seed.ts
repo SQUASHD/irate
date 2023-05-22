@@ -1,6 +1,6 @@
-import { PrismaClient } from ".prisma/client";
-import { env } from "@/env.mjs";
-const prisma = new PrismaClient();
+import { env } from "../env.mjs";
+import { prisma } from "@/../lib/db";
+
 async function main() {
   const adminId = env.CLERK_ADMIN_ID;
   await prisma.category.upsert({
