@@ -1,6 +1,7 @@
 "use client";
 import { useSelectedLayoutSegments } from "next/navigation";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export default function BreadCrumb() {
   const segments = useSelectedLayoutSegments();
@@ -10,31 +11,35 @@ export default function BreadCrumb() {
   });
 
   return (
-    <nav className="mx-auto flex max-w-2xl items-center justify-between px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+    <nav className="mx-auto flex max-w-2xl items-center justify-between px-4 font-medium sm:px-6 lg:max-w-7xl lg:px-8">
       <ul className="flex flex-wrap items-center text-sm uppercase sm:text-base">
         {segments.length > 0 ? (
           <li>
             <Link
               href="/"
-              className="group relative inline-block text-zinc-100 transition duration-300"
+              className={cn(
+                "group relative inline-block text-zinc-100 transition duration-300",
+                "after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:max-w-full after:bg-current after:opacity-0 after:transition-all hover:after:bottom-0 hover:after:opacity-100"
+              )}
             >
               Home
-              <span className="relative bottom-1 block h-[1px] max-w-0 bg-zinc-200 transition-all duration-500 group-hover:max-w-full"></span>
             </Link>
           </li>
         ) : null}
         {segments.map((segment, index) => (
           <li
             key={index}
-            className="text-zinc-200 before:mx-1 before:text-white before:content-['/']"
+            className="text-zinc-200 before:mx-1 before:text-white before:content-['›']"
           >
             {index < segments.length - 1 ? (
               <Link
                 href={`${compoundedSegments[index]}`}
-                className="group relative inline-block transition duration-300"
+                className={cn(
+                  "group relative inline-block transition duration-300",
+                  "after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:max-w-full after:bg-current after:opacity-0 after:transition-all hover:after:bottom-0 hover:after:opacity-100"
+                )}
               >
                 {decodeURI(segment).replace("-", " ")}
-                <span className="relative bottom-1 block h-[1px] max-w-0 bg-current transition-all duration-500 group-hover:max-w-full"></span>
               </Link>
             ) : (
               <span className="text-amber-400">
