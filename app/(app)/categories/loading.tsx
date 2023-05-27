@@ -1,6 +1,6 @@
 "use client";
 
-import GridCard from "../../../components/GridCard";
+import GridCard from "@/components/GridCard";
 
 export default function Loading() {
   return (

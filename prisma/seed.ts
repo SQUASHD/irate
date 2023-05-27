@@ -1,5 +1,5 @@
-import { env } from "../env.mjs";
-import { prisma } from "@/../lib/db";
+import { env } from "@/env.mjs";
+import { prisma } from "@/lib/db";
 
 async function main() {
   const adminId = env.CLERK_ADMIN_ID;
