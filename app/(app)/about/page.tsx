@@ -114,9 +114,7 @@ export default function AboutPage() {
                   More about me
                 </h2>
                 <p className="mt-6 text-xl leading-8 text-zinc-400">
-                  I&apos;m a passionate fullstack developer who got started with
-                  web development in August 2022, and have been hooked ever
-                  since.
+                  I&apos;m a fullstack developer with a passion for programming.
                 </p>
                 <p className="mt-6 text-base leading-7 text-zinc-400">
                   I&apos;m currently looking for work – either employment or
